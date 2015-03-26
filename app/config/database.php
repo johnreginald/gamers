@@ -55,12 +55,12 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'gamer',
+			'database'  => 'wgamer',
 			'username'  => 'root',
 			'password'  => 'laungkee',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'prefix'    => 'wp_',
 		),
 
 		'pgsql' => array(
