@@ -10,6 +10,6 @@
     <![endif]-->
 
     <!-- JQuery -->
-    {{ HTML::script('assets/vendor/jquery.js') }}
+    {{ HTML::script('assets/js/jquery.js') }}
     {{ HTML::script('assets/js/bootstrap.min.js') }}
     

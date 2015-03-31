@@ -41,18 +41,20 @@ class AccountController extends BaseController {
     }
 
     public function postRegister() {
+
         $rules = array(
             'username' => 'unique:users|required|min:4',
             'email' => 'unique:users|required|email',
             'password' => 'required|alpha_num|between:4,30|confirmed',
             'password_confirmation' => 'required|alpha_num|between:4,30'
         );
+
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
             return Redirect::to('register')->withErrors($validator)->withInput(Input::except('password', 'password_confirmation'));
         } else {
-            $account = new User;
+            $account = new Account;
             $account->username = Input::get('username');
             $account->password = Hash::make(Input::get('password'));
             $account->email = Input::get('email');
@@ -143,7 +145,7 @@ class AccountController extends BaseController {
     }
 
     public function getShop() {
-
+        return View::make('User.shop');
     }
 
 }

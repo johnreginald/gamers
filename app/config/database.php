@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'wgamer',
+			'database'  => 'gamer',
 			'username'  => 'root',
 			'password'  => 'laungkee',
 			'charset'   => 'utf8',

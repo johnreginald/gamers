@@ -6,7 +6,9 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"jgrossi/corcel": "dev-master"
+		"jgrossi/corcel": "dev-master",
+		"gloudemans/shoppingcart": "~1.2",
+		"barryvdh/laravel-debugbar": "~1.8"
 	},
 	"autoload": {
 		"classmap": [

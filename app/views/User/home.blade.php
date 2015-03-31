@@ -62,9 +62,8 @@
                 </div>
                 <div class="panel-body">
                     @foreach ($contents as $c)
-                        <h4>{{ $c->title }}</h4>
-                        <small>Author : {{ $c->author }}</small>
-                        <p>{{ $c->content }}</p>
+                        <h4>{{ $c->post_title }}</h4>
+                        <p>{{ $c->post_content }}</p>
                         <hr>
                     @endforeach
                 </div>

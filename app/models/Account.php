@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class Account extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
@@ -14,11 +14,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'accounts';
 
 	public static $rules = [
-		'username' => 'unique:users|required|min:4',
-		'email' => 'unique:users|required|email',
+		'username' => 'unique:accounts|required|min:4',
+		'email' => 'unique:accounts|required|email',
 		'password' => 'required|alpha_num|between:4,30|confirmed',
 		'password_confirmation' => 'required|alpha_num|between:4,30'
 	];

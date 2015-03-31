@@ -11,109 +11,83 @@
   |
 */
 
-// Route::get('post/{id}', 'ContentsController@view');
+Route::get('post/{id}', 'ContentsController@view');
 
-// Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLogout'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLogout'));
 
 // Route::filter('loggedin', function() {
-//    if (Auth::check()) {
-//        return Redirect::to('administrator');
-//    }
+//     if (Auth::check()) {
+//         return Redirect::to('administrator');
+//     }
 // });
 
 // Route::group(array('before' => 'loggedin'), function() {
-	
-// 	Route::get('login', 'AccountController@getLogin');
-// 	Route::post('login', 'AccountController@postLogin');
 
-// 	Route::get('register', 'AccountController@getRegister');
-// 	Route::post('register', 'AccountController@postRegister');
+    Route::get('login', 'AccountController@getLogin');
+    Route::post('login', 'AccountController@postLogin');
 
-// 	Route::get('reset', 'AccountController@getReset');
-// 	Route::post('reset', 'AccountController@postReset');
+    Route::get('register', 'AccountController@getRegister');
+    Route::post('register', 'AccountController@postRegister');
 
-// 	Route::post('password', 'AccountController@postPassword');
+    Route::get('reset', 'AccountController@getReset');
+    Route::post('reset', 'AccountController@postReset');
 
-// 	Route::post('email', 'AccountController@postEmail');
+    Route::post('password', 'AccountController@postPassword');
 
-// 	Route::post('prepaid', 'AccountController@postPrepaid');
+    Route::post('email', 'AccountController@postEmail');
 
-// 	Route::get('shop', 'AccountController@getShop');
+    Route::post('prepaid', 'AccountController@postPrepaid');
+
+    Route::get('shop', 'AccountController@getShop');
 
 // });
-   
+
 // Route::filter('auth_check', function() {
-//    if (!Auth::check()) {
-//        return Redirect::to('login');
-//    }
+//     if (!Auth::check()) {
+//         return Redirect::to('login');
+//     }
 // });
 
 // Route::group(array('before' => 'auth_check'), function(){
 
-// 	Route::get('dashboard', 'AccountController@getIndex');
+    Route::get('dashboard', 'AccountController@getIndex');
 
 // });
 
 // Route::group(array('prefix' => 'administrator', 'before' => 'auth_check',), function() {
 
-// 	Route::get('/', 'AdministratorController@getIndex');
+//     Route::get('/', 'AdministratorController@getIndex');
 
-// 	// Contents Controller Route
+// // User Administration Controller Route
 
-// 	Route::get('contents/trash/empty', 'ContentsController@emptytrash');
+//     Route::post('user/search', 'UAController@search');
 
-// 	Route::get('contents/trash/{id}/{salt}', 'ContentsController@trash');
+//     Route::resource('user', 'UAController');
 
-// 	Route::get('contents/restore/{id}/{salt}', 'ContentsController@restore');
+// // Shop Controller Route
 
-// 	Route::get('contents/delete/{id}/{salt}', 'ContentsController@delete');
+//     Route::resource('shop', 'ShopsController');
 
-// 	Route::post('contents/search', 'ContentsController@search');
+// // Media Controller Route
 
-// 	Route::get('contents/sort/{name}', 'ContentsController@sort');
+//     Route::get('media', 'AdministratorController@getMedia');
+//     Route::post('media', 'AdministratorController@postMedia');
 
-// 	Route::resource('contents', 'ContentsController');
+// // Prepaid Controller Route
 
-// 	// User Administration Controller Route
+//     Route::post('prepaid/search', 'AdministratorController@prepaid_search');
 
-// 	Route::post('user/search', 'UAController@search');
+//     Route::get('prepaid', 'AdministratorController@getPrepaid');
+//     Route::post('prepaid', 'AdministratorController@postPrepaid');
 
-// 	Route::resource('user', 'UAController');
+//     Route::post('prepaid/generate', 'AdministratorController@postPrepaidGenerate');
 
-// 	// Shop Controller Route
+// // TODO ROUTE
 
-// 	Route::resource('shop', 'ShopsController');
+//     Route::get('order', 'AdministratorController@getOrder');
 
-// 	// Media Controller Route
-
-// 	Route::get('media', 'AdministratorController@getMedia');
-// 	Route::post('media', 'AdministratorController@postMedia');
-
-// 	// Prepaid Controller Route
-
-// 	Route::post('prepaid/search', 'AdministratorController@prepaid_search');
-
-// 	Route::get('prepaid', 'AdministratorController@getPrepaid');
-// 	Route::post('prepaid', 'AdministratorController@postPrepaid');
-
-// 	Route::post('prepaid/generate', 'AdministratorController@postPrepaidGenerate');
-
-// 	// TODO ROUTE
-
-// 	Route::get('order', 'AdministratorController@getOrder');
-
-// 	Route::get('settings', 'AdministratorController@getSettings');
+//     Route::get('settings', 'AdministratorController@getSettings');
 
 // });
 
-// Route::any('/', 'HomeController@index');
-
-Route::get('/', function(){
-	$posts = Post::get();
-	foreach($posts as $p) {
-		echo $p->post_title;
-		echo "<br>";
-		echo $p->post_content;
-		echo "<br>";
-	}
-});
+Route::any('/', 'HomeController@index');
