@@ -10,19 +10,21 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><a href="#"><img src="{{ asset('assets/img/logo.png') }}"></a></div>
+                <div class="col-md-4"></div>
+                 <div class="col-md-4 text-center"><a href="#"><img src="{{ asset('assets/img/logo.png') }}" style="height: 150px; margin-top: 20px;"></a></div>
+                <div class="col-md-4"></div>
             </div>
         </div>
 
         <div class="navi-bar">
             <ul>
                 <li><a href="{{ URL::to('/')}}">Home</a></li>
-                <li><a href="{{ URL::to('register')}}">Game</a></li>
-                <li><a href="{{ URL::to('dashboard') }}">Payment Method</a></li>
-                <li><a href="#">Support</a></li>
+                <li><a href="{{ URL::to('register')}}">Register</a></li>
+                <li><a href="{{ URL::to('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ URL::to('shop') }}">Shop</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="{{ URL::to('login')}}">Sign In</a></li>
-                <li><a href="{{ URL::to('register')}}">Register</a></li>
+                <li><a href="{{ URL::to('checkout')}}"><span class="glyphicon glyphicon-shopping-cart"></span> {{ Cart::count(); }} items - ${{ Cart::total(); }}</a></li>
             </ul>
         </div>
 

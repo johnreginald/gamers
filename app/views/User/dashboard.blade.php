@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container wrapper">
+
+<ol class="breadcrumb">
+  <li><a href="{{ URL::to('/') }}">Home</a></li>
+  <li class="active">Dashboard</li>
+</ol>
+
     <div class="row">
 
         <div class="col-md-3" role="navigation" id="myTab">

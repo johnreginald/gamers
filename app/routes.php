@@ -40,6 +40,16 @@ Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLog
 
     Route::get('shop', 'AccountController@getShop');
 
+    Route::post('shop-add', function(){
+        Cart::add('293ad', 'Product 1', 1, 9.99, array('size' => 'large'));
+        return Redirect::to('shop');
+    });
+
+    Route::get('checkout', function(){
+        $cart = Cart::content();
+        return View::make('User.checkout', compact('cart'));
+    });
+
 // });
 
 // Route::filter('auth_check', function() {
