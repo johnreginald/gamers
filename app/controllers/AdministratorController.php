@@ -2,37 +2,8 @@
 
 class AdministratorController extends BaseController {
 
-    public function __construct() {
-        View::share('name', 'Steve');
-    }
-
     public function getIndex() {
         return View::make('Administrator.dashboard');
-    }
-
-    public function getMedia() {
-        $media = MediaModel::All();
-        return View::make('Administrator.media', compact('media'));
-    }
-
-    public function postMedia() {
-        $rules = array(
-            'image' => 'mimes:jpeg,png,jpg'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return Redirect::to('Administrator/media');
-        } else {
-            $destinationPath = public_path('upload');
-            $filename =  str_random(30) . '.' . Input::file('image')->getClientOriginalExtension();
-            Input::file('image')->move($destinationPath, $filename);
-
-            $media  = new MediaModel;
-            $media->name = $filename;
-            $media->save();
-            return Redirect::back()->with('message', Lang::get('message.upload-success'));
-        }
     }
 
     public function getPrepaid() {

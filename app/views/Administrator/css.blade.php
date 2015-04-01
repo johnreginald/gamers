@@ -1,6 +1,6 @@
 	<!-- Bootstrap Core CSS -->
-	<!-- {{ HTML::style('assets/ide/bt.min.css') }} -->
 	{{ HTML::style('assets/css/bt.min.css') }}
+	{{ HTML::style('assets/css/db.css') }}
 
 	<!-- jQuery -->
 	{{ HTML::script('assets/js/jquery.js') }}

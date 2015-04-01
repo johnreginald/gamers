@@ -20,13 +20,7 @@
 		</div>    	
 	</div>
 </div>
-<br>
-<!-- <div>
-	<a href="{{ URL::to('administrator/contents') }}">All</a>@if( Content::where('status', '!=', 'trash')->count() > 0 ) <span class="badge">{{ Content::where('status', '!=', 'trash')->count() }}</span> @endif |
-	<a href="{{ URL::to('administrator/contents/sort/publish') }}">Published</a>@if( Content::where('status', '=', 'publish')->count() > 0 ) <span class="badge">{{ Content::where('status', '=', 'publish')->count() }}</span> @endif |
-	<a href="{{ URL::to('administrator/contents/sort/draft') }}">Draft</a>@if( Content::where('status', '=', 'draft')->count() > 0 ) <span class="badge">{{ Content::where('status', '=', 'draft')->count() }}</span> @endif |
-	<a href="{{ URL::to('administrator/contents/sort/trash/') }}">Trash</a>@if( Content::where('status', '=', 'trash')->count() > 0 ) <span class="badge">{{ Content::where('status', '=', 'trash')->count() }}</span> @endif
-</div> -->
+
 <br>
 <table class="table table-hover table-bordered">
 	<thead>

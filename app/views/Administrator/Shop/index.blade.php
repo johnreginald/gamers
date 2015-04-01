@@ -30,7 +30,7 @@
 	<tbody class="">
 		@foreach ($shops as $s)
 		<tr>
-			<td><img class="media-object img-responsive" src="{{ asset('assets/img/logo.png') }}" alt="..."></td>
+			<td><a href="{{ URL::to('administrator/shop/' . $s->id . '/edit') }}"><img src="{{ asset('upload/shop/test.jpg') }}" alt="..." class="img-thumbnail"></a></td>
 			<td><a href="{{ URL::to('administrator/shop/' . $s->id . '/edit') }}">{{ $s->name }}</a></td>
 			<td>{{ $s->price }}</td>
 			<td>

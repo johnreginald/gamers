@@ -24,7 +24,9 @@
                 <li><a href="{{ URL::to('shop') }}">Shop</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="{{ URL::to('login')}}">Sign In</a></li>
-                <li><a href="{{ URL::to('checkout')}}"><span class="glyphicon glyphicon-shopping-cart"></span> {{ Cart::count(); }} items - ${{ Cart::total(); }}</a></li>
+                @if(Auth::check())
+                    <li><a href="{{ URL::to('shopping-cart')}}"><span class="glyphicon glyphicon-shopping-cart"></span> {{ Cart::count(); }} items - ${{ Cart::total(); }}</a></li>
+                @endif
             </ul>
         </div>
 
@@ -33,6 +35,7 @@
         <footer>
             <div class="col-md-4">
                 <p>qweruqowieurpqowiuerpqiowuerpqiwuep</p>
+                <button id="check">Check This Out</button>
             </div>
 
             <div class="col-md-4">

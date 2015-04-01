@@ -144,8 +144,4 @@ class AccountController extends BaseController {
         }
     }
 
-    public function getShop() {
-        return View::make('User.shop');
-    }
-
 }

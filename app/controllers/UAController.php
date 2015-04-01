@@ -4,7 +4,7 @@ class UAController extends \BaseController {
 
 	public function index() 
 	{
-		$user = User::all();
+		$user = Account::all();
 
 		return View::make('Administrator.User.index', compact('user'));
 	}
@@ -43,7 +43,7 @@ class UAController extends \BaseController {
 
 	public function view($id)
 	{
-		$content = User::findOrFail($id);
+		$content = Account::findOrFail($id);
 
 		return View::make('User.content', compact('content'));
 	}
@@ -56,7 +56,7 @@ class UAController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = User::find($id);
+		$user = Account::find($id);
 
 		return View::make('Administrator.User.edit', compact('user'));
 		
@@ -70,7 +70,7 @@ class UAController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$user = User::findOrFail($id);
+		$user = Account::findOrFail($id);
 
 		$rules = array(
             'email' => 'email|unique:users,email,' . $id,
@@ -103,7 +103,7 @@ class UAController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		User::destroy($id);
+		Account::destroy($id);
 
 		return Redirect::action('UAController@index')->with('message', Lang::get('message.post-update'))->with('status', 'info');;
 	}	

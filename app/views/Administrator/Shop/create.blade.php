@@ -13,15 +13,15 @@
 	{{ Form::open(array('url' => 'administrator/shop', 'method' => 'POST', 'class' => 'form')) }}
 	<div class="col-md-9">
 		<div class="form-group">
-			<input type="text" name="name" class="form-control" placeholder="Enter Item Name Here..." required autofocus>
+			<input type="text" name="name" class="form-control" placeholder="Item Name..." required autofocus>
 		</div>
 
 		<div class="form-group">
-			<input type="text" name="price" class="form-control" placeholder="Prices" required>
+			<input type="text" name="price" class="form-control" placeholder="Price" required>
 		</div>
 
 		<div class="form-group">
-			<textarea name="description" rows="10" class="form-control"></textarea>
+			<textarea name="description" rows="10" class="form-control" placeholder="Description"></textarea>
 		</div>
 	</div>
 

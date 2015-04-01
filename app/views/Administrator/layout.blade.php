@@ -24,8 +24,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="{{ URL::to('logout') }}">Logout</a></li>
+                        <li><a href="{{ URL::to('logout') }}"><span class="glyphicon glyphicon-log-out"> </span> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,11 +35,7 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li @if (Request::segment(2) == '') class="active" @endif><a href="{{ URL::to('administrator') }}">Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li @if (Request::segment(2) == 'contents') class="active" @endif><a href="{{ URL::action('ContentsController@index') }}">Contents</a></li>
-                        <li @if (Request::segment(2) == 'media') class="active" @endif><a href="{{ URL::action('AdministratorController@getMedia') }}">Media</a></li>
                         <li @if (Request::segment(2) == 'user') class="active" @endif><a href="{{ URL::action('UAController@index') }}">Users</a></li>
-                    </ul>
-                    <ul class="nav nav-sidebar">
                         <li @if (Request::segment(2) == 'shop') class="active" @endif><a href="{{ URL::action('ShopsController@index') }}">Shop</a></li>
                         <li @if (Request::segment(2) == 'prepaid') class="active" @endif><a href="{{ URL::action('AdministratorController@getPrepaid') }}">Prepaid Cards</a></li>
                         <li @if (Request::segment(2) == 'order') class="active" @endif><a href="{{ URL::action('AdministratorController@getOrder') }}">Customer Orders</a></li>

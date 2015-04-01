@@ -15,13 +15,7 @@ Route::get('post/{id}', 'ContentsController@view');
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLogout'));
 
-// Route::filter('loggedin', function() {
-//     if (Auth::check()) {
-//         return Redirect::to('administrator');
-//     }
-// });
-
-// Route::group(array('before' => 'loggedin'), function() {
+Route::group(array('before' => 'logged_in'), function() {
 
     Route::get('login', 'AccountController@getLogin');
     Route::post('login', 'AccountController@postLogin');
@@ -32,72 +26,62 @@ Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLog
     Route::get('reset', 'AccountController@getReset');
     Route::post('reset', 'AccountController@postReset');
 
-    Route::post('password', 'AccountController@postPassword');
+});
 
-    Route::post('email', 'AccountController@postEmail');
+Route::post('password', 'AccountController@postPassword');
 
-    Route::post('prepaid', 'AccountController@postPrepaid');
+Route::post('email', 'AccountController@postEmail');
 
-    Route::get('shop', 'AccountController@getShop');
+Route::post('prepaid', 'AccountController@postPrepaid');
 
-    Route::post('shop-add', function(){
-        Cart::add('293ad', 'Product 1', 1, 9.99, array('size' => 'large'));
-        return Redirect::to('shop');
-    });
+// Frontend Shopping Cart Route
 
-    Route::get('checkout', function(){
-        $cart = Cart::content();
-        return View::make('User.checkout', compact('cart'));
-    });
+Route::get('shop', 'ShopsController@the_shop');
 
-// });
+Route::post('shop-add', 'ShopsController@add_item');
 
-// Route::filter('auth_check', function() {
-//     if (!Auth::check()) {
-//         return Redirect::to('login');
-//     }
-// });
+Route::get('shopping-cart', 'ShopsController@shopping_cart');
 
-// Route::group(array('before' => 'auth_check'), function(){
+Route::post('checkout', 'ShopsController@checkout');
 
-    Route::get('dashboard', 'AccountController@getIndex');
+// Dashboard Route
 
-// });
+Route::get('dashboard', 'AccountController@getIndex');
 
-// Route::group(array('prefix' => 'administrator', 'before' => 'auth_check',), function() {
 
-//     Route::get('/', 'AdministratorController@getIndex');
+Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function() {
 
-// // User Administration Controller Route
+    Route::get('/', 'AdministratorController@getIndex');
 
-//     Route::post('user/search', 'UAController@search');
+    // User Administration Controller Route
 
-//     Route::resource('user', 'UAController');
+    Route::post('user/search', 'UAController@search');
 
-// // Shop Controller Route
+    Route::resource('user', 'UAController');
 
-//     Route::resource('shop', 'ShopsController');
+    // Shop Controller Route
 
-// // Media Controller Route
+    Route::resource('shop', 'ShopsController');
 
-//     Route::get('media', 'AdministratorController@getMedia');
-//     Route::post('media', 'AdministratorController@postMedia');
+    // Prepaid Controller Route
 
-// // Prepaid Controller Route
+    Route::post('prepaid/search', 'AdministratorController@prepaid_search');
 
-//     Route::post('prepaid/search', 'AdministratorController@prepaid_search');
+    Route::get('prepaid', 'AdministratorController@getPrepaid');
+    Route::post('prepaid', 'AdministratorController@postPrepaid');
 
-//     Route::get('prepaid', 'AdministratorController@getPrepaid');
-//     Route::post('prepaid', 'AdministratorController@postPrepaid');
+    Route::post('prepaid/generate', 'AdministratorController@postPrepaidGenerate');
 
-//     Route::post('prepaid/generate', 'AdministratorController@postPrepaidGenerate');
+    // TODO ROUTE
 
-// // TODO ROUTE
+    Route::get('order', 'AdministratorController@getOrder');
 
-//     Route::get('order', 'AdministratorController@getOrder');
+    Route::get('settings', 'AdministratorController@getSettings');
 
-//     Route::get('settings', 'AdministratorController@getSettings');
+});
 
-// });
+Route::any('dshop', function(){
+    Cart::destroy();
+});
 
 Route::any('/', 'HomeController@index');
