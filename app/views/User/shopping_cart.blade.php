@@ -33,7 +33,7 @@
                         <td>${{ $c->subtotal }}</td>
                    </tr>
 
-                <?php endforeach;?>
+                @endforeach
 
                 </tbody>
             </table>

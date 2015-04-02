@@ -1,6 +1,6 @@
 <?php
 
-class Order extends \Eloquent {
+class Order extends Eloquent {
 
 	protected $table = 'ordered_items';
 
@@ -10,6 +10,13 @@ class Order extends \Eloquent {
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = ['id', 'customer_id', 'item_id', 'quantity'];
+	protected $fillable = ['id', 'account_id', 'item_id', 'quantity'];
 
+	public function account() {
+		return $this->belongsTo('Account');
+	}
+
+	public function shop() {
+		return $this->belongsTo('Shop', 'item_id');
+	}
 }

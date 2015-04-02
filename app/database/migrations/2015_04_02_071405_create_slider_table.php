@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderedItems extends Migration {
+class CreateSliderTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,13 @@ class CreateOrderedItems extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ordered_items', function(Blueprint $table)
+		Schema::create('slider', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('account_id');
-			$table->integer('item_id');
-			$table->integer('quantity');
-			$table->boolean('completed');
+			$table->string('url', 255);
+			$table->string('title', 255);
+			$table->text('description', 255);
+			$table->integer('order');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +30,7 @@ class CreateOrderedItems extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ordered_items');
+		Schema::drop('slider');
 	}
 
 }

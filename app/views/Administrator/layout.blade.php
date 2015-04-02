@@ -24,6 +24,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ URL::to('/') }}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> View website</a></li>
                         <li><a href="{{ URL::to('logout') }}"><span class="glyphicon glyphicon-log-out"> </span> Logout</a></li>
                     </ul>
                 </div>
@@ -39,6 +40,8 @@
                         <li @if (Request::segment(2) == 'shop') class="active" @endif><a href="{{ URL::action('ShopsController@index') }}">Shop</a></li>
                         <li @if (Request::segment(2) == 'prepaid') class="active" @endif><a href="{{ URL::action('AdministratorController@getPrepaid') }}">Prepaid Cards</a></li>
                         <li @if (Request::segment(2) == 'order') class="active" @endif><a href="{{ URL::action('AdministratorController@getOrder') }}">Customer Orders</a></li>
+                        <li @if (Request::segment(2) == 'slider') class="active" @endif><a href="{{ URL::action('AdministratorController@getSlider') }}">Slider</a></li>
+                        <li @if (Request::segment(2) == 'sponsor') class="active" @endif><a href="{{ URL::action('AdministratorController@getSponsor') }}">Sponsor</a></li>
                         <li @if (Request::segment(2) == 'settings') class="active" @endif><a href="{{ URL::action('AdministratorController@getSettings') }}">Website Settings</a></li>
                     </ul>
                 </div>

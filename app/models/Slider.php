@@ -1,8 +1,8 @@
 <?php
 
-class Shop extends \Eloquent {
+class Slider extends Eloquent {
 
-	protected $table = "shops";
+	protected $table = 'slider';
 
 	// Add your validation rules here
 	public static $rules = [
@@ -10,6 +10,6 @@ class Shop extends \Eloquent {
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = ['name', 'price', 'description'];
+	// protected $fillable = ['id', 'account_id', 'item_id', 'quantity'];
 
 }

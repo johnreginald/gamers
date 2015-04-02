@@ -1,5 +1,5 @@
     <!-- Bootstrap -->
-    {{ HTML::style('assets/css/bt.min.css') }}
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/assets/css/bootstrap.{{ Config::get('settings.theme') }}.min.css">
     {{ HTML::style('assets/css/custom.css') }}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

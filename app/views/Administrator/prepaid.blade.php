@@ -19,7 +19,7 @@
 			{{ Form::close() }}
 		</div>		    	
     </div>
-</div>
+</div><hr>
 {{ $prepaid->links() }}
 <table class="table table-hover table-bordered">
 	<thead>

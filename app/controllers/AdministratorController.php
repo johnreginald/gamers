@@ -43,9 +43,56 @@ class AdministratorController extends BaseController {
         return View::make('Administrator.prepaid', compact('prepaid'));
     }
 
+    // Order Function
+
     public function getOrder() {
-        return View::make('Administrator.order');
+
+        $order = Order::All();
+        
+        return View::make('Administrator.order')->with('order', $order);
+
     }
+
+    // Slider Function
+
+    public function getSlider() {
+
+        $slider = Slider::All();
+        return View::make('Administrator.slider', compact('slider') );
+
+    }
+
+    public function postSlider() {
+
+        $slider = new Slider;
+        $slider->title = Input::get('title');
+        $slider->url = Input::get('url');
+        $slider->order = Input::get('order');
+        $slider->description = Input::get('description');
+        $slider->save();
+        return Redirect::to('administrator/slider');
+    }
+
+    // Sponsor Function
+
+    public function getSponsor() {
+
+        $slider = Slider::All();
+        return View::make('Administrator.sponsor', compact('slider') );
+
+    }
+
+    public function postSponsor() {
+
+        $slider = new Slider;
+        $slider->title = Input::get('title');
+        $slider->url = Input::get('url');
+        $slider->order = Input::get('order');
+        $slider->description = Input::get('description');
+        $slider->save();
+        return Redirect::to('administrator/slider');
+    }
+    // Website Settings
 
     public function getSettings() {
         return View::make('Administrator.settings');

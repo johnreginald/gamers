@@ -72,16 +72,34 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
 
     Route::post('prepaid/generate', 'AdministratorController@postPrepaidGenerate');
 
-    // TODO ROUTE
+    // Order Management Route
 
     Route::get('order', 'AdministratorController@getOrder');
+
+    // Advertisement Management Route TODO
+
+    Route::get('advertisement', 'AdministratorController@getAdvertisement');
+    Route::post('advertisement', 'AdministratorController@postAdvertisement');
+
+    // Sponsor Management Route
+
+    Route::get('sponsor', 'AdministratorController@getSponsor');
+    Route::post('sponsor', 'AdministratorController@postSponsor');
+
+    // Slider Management Route
+
+    Route::get('slider', 'AdministratorController@getSlider');
+    Route::post('slider', 'AdministratorController@postSlider');
+
+
+    // Webstie Settings Management Route
 
     Route::get('settings', 'AdministratorController@getSettings');
 
 });
 
 Route::any('dshop', function(){
-    Cart::destroy();
+    // Cart::destroy();
 });
 
 Route::any('/', 'HomeController@index');

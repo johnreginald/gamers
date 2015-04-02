@@ -19,14 +19,16 @@
         <div class="navi-bar">
             <ul>
                 <li><a href="{{ URL::to('/')}}">Home</a></li>
-                <li><a href="{{ URL::to('register')}}">Register</a></li>
+                @if(Auth::check())
                 <li><a href="{{ URL::to('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ URL::to('logout') }}">Logout</a></li>
+                @else
+                <li><a href="{{ URL::to('register')}}">Register</a></li>
+                <li><a href="{{ URL::to('login')}}">Sign In</a></li>
+                @endif
                 <li><a href="{{ URL::to('shop') }}">Shop</a></li>
                 <li><a href="#">About Us</a></li>
-                <li><a href="{{ URL::to('login')}}">Sign In</a></li>
-                @if(Auth::check())
-                    <li><a href="{{ URL::to('shopping-cart')}}"><span class="glyphicon glyphicon-shopping-cart"></span> {{ Cart::count(); }} items - ${{ Cart::total(); }}</a></li>
-                @endif
+                <li><a href="{{ URL::to('shopping-cart')}}"><span class="glyphicon glyphicon-shopping-cart"></span> {{ Cart::count(); }} items - ${{ Cart::total(); }}</a></li>
             </ul>
         </div>
 

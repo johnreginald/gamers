@@ -141,7 +141,7 @@ class ShopsController extends \BaseController {
 		// Checkout and Register Ordered Items in Database
 		foreach (Cart::content() as $c) {
 			$order = new Order;
-			$order->customer_id = Auth::id();
+			$order->account_id = Auth::id();
 			$order->item_id = $c->id;
 			$order->quantity = $c->qty;
 			$order->save();
