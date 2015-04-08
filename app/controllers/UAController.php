@@ -22,8 +22,8 @@ class UAController extends \BaseController {
 	public function store()
 	{
         $rules = array(
-            'username' => 'unique:users|required|min:4',
-            'email' => 'unique:users|required|email',
+            'username' => 'unique:accounts|required|min:4',
+            'email' => 'unique:accounts|required|email',
             'password' => 'required|alpha_num|between:4,30|confirmed',
             'password_confirmation' => 'required|alpha_num|between:4,30'
         );
@@ -73,7 +73,7 @@ class UAController extends \BaseController {
 		$user = Account::findOrFail($id);
 
 		$rules = array(
-            'email' => 'email|unique:users,email,' . $id,
+            'email' => 'email|unique:accounts,email,' . $id,
             'password' => 'alpha_num|between:4,30|confirmed',
             'password_confirmation' => 'alpha_num|between:4,30'
         );
@@ -109,12 +109,12 @@ class UAController extends \BaseController {
 	}	
 
 	public function search() {
-		$user = DB::table('users')
+		$user = DB::table('accounts')
 				->where(function($query){
 					$query->orWhere('username', 'LIKE', '%' . Input::get('search') . '%')
 					->orWhere('email', 'LIKE', '%' . Input::get('search') . '%');
 				})
 				->get();
-		return View::make('Administrator.User.index', compact('users'));
+		return View::make('Administrator.User.index')->with('user', $user);
 	}
 }

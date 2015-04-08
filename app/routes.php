@@ -51,8 +51,6 @@ Route::get('dashboard', 'AccountController@getIndex');
 
 Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function() {
 
-    Route::get('/', 'AdministratorController@getIndex');
-
     // User Administration Controller Route
 
     Route::post('user/search', 'UAController@search');
@@ -91,15 +89,71 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
     Route::get('slider', 'AdministratorController@getSlider');
     Route::post('slider', 'AdministratorController@postSlider');
 
-
     // Webstie Settings Management Route
 
     Route::get('settings', 'AdministratorController@getSettings');
+
+    // Other Route
+    Route::post('upload', function(){
+        echo Input::file('file')->getClientOriginalName();
+        // echo "asd";
+    });
+
+    Route::get('/', 'AdministratorController@getIndex');
 
 });
 
 Route::any('dshop', function(){
     // Cart::destroy();
+});
+
+Route::get('test', function() {
+    return View::make('test');
+});
+
+Route::post('test', function () {
+
+    // Grab our files input
+    $files = Input::file('files');
+    // We will store our uploads in public/uploads/basic
+    $assetPath = '/uploads';
+    $uploadPath = public_path($assetPath);
+    // We need an empty arry for us to put the files back into
+    $results = array();
+
+    foreach ($files as $file) {
+        // store our uploaded file in our uploads folder
+        $file->move($uploadPath, $file->getClientOriginalName());
+        // set our results to have our asset path
+        $name = $assetPath . '/' . $file->getClientOriginalName();
+        $results[] = compact('name');
+    }
+
+    // return our results in a files object
+    // return array(
+    //     'files' => $results
+    // );
+    return Response::json(array('files' => $results));
+
+    // $file = Input::file('file');
+
+    // if($file) {
+
+    //     $destinationPath = public_path() . '/uploads/';
+    //     $filename = $file->getClientOriginalName();
+
+    //     $upload_success = Input::file('file')->move($destinationPath, $filename);
+
+    //     if ($upload_success) {
+
+    //         // resizing an uploaded file
+    //         Image::make($destinationPath . $filename)->resize(100, 100)->save($destinationPath . "100x100_" . $filename);
+
+    //         return Response::json('success', 200);
+    //     } else {
+    //         return Response::json('error', 400);
+    //     }
+    // }
 });
 
 Route::any('/', 'HomeController@index');

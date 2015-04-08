@@ -123,6 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 	),
 
 	/*
@@ -191,6 +193,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Cart'            	=> 'Gloudemans\Shoppingcart\Facades\Cart',
 		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
+		'Image'       		=> 'Intervention\Image\Facades\Image',
 
 	),
 

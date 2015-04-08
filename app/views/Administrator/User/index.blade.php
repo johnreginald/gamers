@@ -7,7 +7,6 @@
 		<h3 class="page-header">
 			User Management
 		</h3>
-		<hr>
 	</div>
 	<div class="container-fluid">
 		<div class="pull-right">
@@ -54,6 +53,7 @@
 		@empty
 		<tr>
 			<td>There's no user account to show.</td>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>

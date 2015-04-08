@@ -8,7 +8,9 @@
 		"laravel/framework": "4.2.*",
 		"jgrossi/corcel": "dev-master",
 		"gloudemans/shoppingcart": "~1.2",
-		"barryvdh/laravel-debugbar": "~1.8"
+		"barryvdh/laravel-debugbar": "~1.8",
+		"intervention/image": "dev-master",
+		"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

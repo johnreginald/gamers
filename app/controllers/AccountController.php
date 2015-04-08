@@ -106,7 +106,7 @@ class AccountController extends BaseController {
     public function postEmail() {
         $user = Auth::user();
         $rules = array(
-            'newemail' => 'unique:users,email|required|email'
+            'newemail' => 'unique:accounts,email|required|email'
         );
         $validator = Validator::make(Input::all(), $rules);
 
