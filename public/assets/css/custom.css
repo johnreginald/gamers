@@ -4,7 +4,7 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 380px;
+    margin-bottom: 280px;
 }
 footer {
     position: absolute;
@@ -18,29 +18,6 @@ footer {
     background-color: black;
     color: white;
 }
-.navi-bar li {
-    list-style-type: none;
-    display: inline-block;
-    height: 40px;
-}
-.navi-bar {
-    text-align: center;
-    margin-top: 40px;
-    background: black;
-    /*margin-bottom: -10px;*/
-}
-.navi-bar a {
-    text-decoration: none;
-    color: white;
-    display: block;
-    height: 40px;
-    padding: 0px 14px;
-    line-height: 40px;
-    white-space: nowrap;
-}
-.navi-bar a:hover {
-    background: none repeat scroll 0% 0% #26282A;
-}
 .login-form {
     border-radius: 5px;
     border: 1px solid #E5E5E5;
@@ -51,8 +28,8 @@ footer {
     margin-top: 40px;
     margin-bottom: 40px;
     min-height: 100%;
+    padding-top: 10px;
 }
-
 .sidenav li {
     list-style-type: none;
     background: black;
@@ -71,4 +48,11 @@ footer {
 }
 .slide {
     margin-top: 0px;
+}
+.search-box {
+    border: 1px solid transparent;
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
 }

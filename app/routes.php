@@ -11,7 +11,7 @@
   |
 */
 
-Route::get('post/{id}', 'ContentsController@view');
+// Route::get('post/{id}', 'ContentsController@view');
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLogout'));
 
@@ -51,7 +51,25 @@ Route::get('dashboard', 'AccountController@getIndex');
 
 Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function() {
 
-    // User Administration Controller Route
+    // Posts Management Route
+    Route::post('post/search', function(){
+        // $posts = Post::search(Input::get('search'));
+
+        $q = Input::get('search');
+        $posts = Post::where('title', 'LIKE', '%'. $q .'%')
+        ->orWhere('content', 'LIKE', '%'. $q .'%')
+        ->orWhere('author', 'LIKE', '%'. $q .'%')
+        ->get();
+
+        foreach ($posts as $p) {
+            echo $p->title . '<br>';
+            echo $p->author . '<br>';
+            echo $p->content . '<hr>';
+        }
+    });
+    Route::resource('post', 'PostsController');
+
+    // Users Management Route
 
     Route::post('user/search', 'UAController@search');
 
@@ -94,66 +112,15 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
     Route::get('settings', 'AdministratorController@getSettings');
 
     // Other Route
-    Route::post('upload', function(){
-        echo Input::file('file')->getClientOriginalName();
-        // echo "asd";
-    });
+    Route::post('upload_basic', 'AdministratorController@upload_basic');
 
+    Route::post('upload_plus', 'AdministratorController@upload_plus');
+
+    Route::post('upload_ide', 'AdministratorController@upload_ide');
+
+    // Root Route
     Route::get('/', 'AdministratorController@getIndex');
 
-});
-
-Route::any('dshop', function(){
-    // Cart::destroy();
-});
-
-Route::get('test', function() {
-    return View::make('test');
-});
-
-Route::post('test', function () {
-
-    // Grab our files input
-    $files = Input::file('files');
-    // We will store our uploads in public/uploads/basic
-    $assetPath = '/uploads';
-    $uploadPath = public_path($assetPath);
-    // We need an empty arry for us to put the files back into
-    $results = array();
-
-    foreach ($files as $file) {
-        // store our uploaded file in our uploads folder
-        $file->move($uploadPath, $file->getClientOriginalName());
-        // set our results to have our asset path
-        $name = $assetPath . '/' . $file->getClientOriginalName();
-        $results[] = compact('name');
-    }
-
-    // return our results in a files object
-    // return array(
-    //     'files' => $results
-    // );
-    return Response::json(array('files' => $results));
-
-    // $file = Input::file('file');
-
-    // if($file) {
-
-    //     $destinationPath = public_path() . '/uploads/';
-    //     $filename = $file->getClientOriginalName();
-
-    //     $upload_success = Input::file('file')->move($destinationPath, $filename);
-
-    //     if ($upload_success) {
-
-    //         // resizing an uploaded file
-    //         Image::make($destinationPath . $filename)->resize(100, 100)->save($destinationPath . "100x100_" . $filename);
-
-    //         return Response::json('success', 200);
-    //     } else {
-    //         return Response::json('error', 400);
-    //     }
-    // }
 });
 
 Route::any('/', 'HomeController@index');

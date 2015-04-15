@@ -20,6 +20,7 @@ class CreateAccount extends Migration {
                 $table->string('email', 255)->unique('email');
                 $table->timestamps();
                 $table->rememberToken();
+                $table->softDeletes();
             });
 	}
 

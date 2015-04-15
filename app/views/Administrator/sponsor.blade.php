@@ -1,18 +1,20 @@
 @extends('Administrator.layout')
 
 @section('content')
-    <button class="btn btn-primary" id="add">New Slider</button>
+    <button class="btn btn-primary" id="add">New Sponsor</button>
     <hr>
     <!-- New Slider Form - Hidden on Window Load -->
     <div class="row" id="newform">
         {{ Form::open(array('url' => 'administrator/slider', 'method' => 'POST', 'class' => 'form')) }}
         <div class="col-md-9">
+            
             <div class="form-group">
-                <input type="text" name="title" class="form-control" placeholder="Slider Name" required>
+                @include('File.basic-form')
+                <input type="hidden" name="url" id="url">
             </div>
 
             <div class="form-group">
-                <input type="text" name="url" class="form-control" placeholder="Image Url" required>
+                <input type="text" name="title" class="form-control" placeholder="Slider Name" required>
             </div>
 
             <div class="form-group">
@@ -52,7 +54,7 @@
         <tbody>
             @foreach($slider as $s)
             <tr>    
-                <td class="col-md-1"><img src="/{{ $s->url }}" style="height: 93px;"></td>
+                <td class="col-md-1"><img src="{{ URL::to('/') }}/{{ $s->url }}" style="height: 93px;"></td>
                 <td>{{ $s->title }}</td>
                 <td>{{ $s->description }}</td>
                 <td>{{ $s->order }}</td>
@@ -70,4 +72,5 @@
             });
         });
     </script>
+@include('File.basic-script')    
 @stop

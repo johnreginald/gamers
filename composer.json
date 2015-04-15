@@ -10,7 +10,8 @@
 		"gloudemans/shoppingcart": "~1.2",
 		"barryvdh/laravel-debugbar": "~1.8",
 		"intervention/image": "dev-master",
-		"way/generators": "~2.0"
+		"way/generators": "~2.0",
+		"fzaninotto/faker": "v1.3.0"
 	},
 	"autoload": {
 		"classmap": [

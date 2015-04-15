@@ -11,6 +11,9 @@
 
 return array(
 
+	'title' => 'For Gamers, By Gamers',
+
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Theme Settings
@@ -18,10 +21,12 @@ return array(
 	| Total of 17 Theme Supported
 	|
 	| Supported Theme: cosmo, darkly, cerulean, cyborg, flatly, journal, lumen,
-	| 				   min, paper, readable, sandstone, simplex, slate, spacelab,
+	| 				   default, paper, readable, sandstone, simplex, slate, spacelab,
 	|				   superhero, united, yeti
 	|
 	*/
-	'theme' => 'cosmo',
+
+	'theme' => 'paper',
+
 
 );

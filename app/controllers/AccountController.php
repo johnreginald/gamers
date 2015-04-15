@@ -3,8 +3,9 @@
 class AccountController extends BaseController {
 
     public function getIndex() {
-        $order = Order::find(Auth::id());
-        return View::make('User.dashboard')->with('order', $order);
+        // $order = Order::findOrFail(Auth::id());
+        // return View::make('User.dashboard')->with('order', $order);
+        return View::make('User.dashboard');
     }
 
     // LOGIN MECHANISM

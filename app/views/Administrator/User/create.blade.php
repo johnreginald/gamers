@@ -6,7 +6,6 @@
         <h3 class="page-header">
             New User
         </h3>
-        <hr>
     </div>
 </div>
 

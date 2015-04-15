@@ -60,7 +60,7 @@ return array(
 			'password'  => 'laungkee',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => 'wp_',
+			'prefix'    => '',
 		),
 
 		'pgsql' => array(

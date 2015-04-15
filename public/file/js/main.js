@@ -18,7 +18,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'test'
+        url: 'upload_plus'
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -34,7 +34,7 @@ $(function () {
     if (window.location.hostname === '127.0.0.1') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
-            url: 'test',
+            url: 'upload_plus',
             // Enable image resizing, except for Android and Opera,
             // which actually support image resizing, but fail to
             // send Blob objects via XHR requests:
@@ -43,18 +43,6 @@ $(function () {
             maxFileSize: 5000000,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
         });
-        // Upload server status check for browsers with CORS support:
-        if ($.support.cors) {
-            $.ajax({
-                url: 'test',
-                type: 'HEAD'
-            }).fail(function () {
-                $('<div class="alert alert-danger"/>')
-                    .text('Upload server currently unavailable - ' +
-                            new Date())
-                    .appendTo('#fileupload');
-            });
-        }
     } else {
         // Load existing files:
         $('#fileupload').addClass('fileupload-processing');

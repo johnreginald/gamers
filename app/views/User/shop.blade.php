@@ -7,6 +7,25 @@
   <li><a href="{{ URL::to('/') }}">Home</a></li>
   <li class="active">Shop</li>
 </ol>
+    <div class="well">
+        <h5>Browse Our Shop</h5>
+        {{ Form::open(array('url' => 'search', 'method' => 'POST', 'class' => 'form form-inline')) }}
+            <div class="form-group">
+                <input class="form-control" type="text" name="item-name" placeholder="Search Your Item">
+            </div>
+
+            <div class="form-group">
+                <select class="form-control">
+                    <option>Game Item</option>
+                    <option>Game Key</option>
+                    <option>RIG</option>
+                    <option>Dota 2</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary">Search</button>
+        {{ Form::close() }}
+    </div>
 
     <div class="row">
         @foreach($shop as $s)

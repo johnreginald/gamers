@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Project name</a>
+                    <a class="navbar-brand" href="#">{{ Config::get('settings.title') }}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -36,8 +36,9 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li @if (Request::segment(2) == '') class="active" @endif><a href="{{ URL::to('administrator') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li @if (Request::segment(2) == 'post') class="active" @endif><a href="{{ URL::action('PostsController@index') }}">Posts</a></li>
                         <li @if (Request::segment(2) == 'user') class="active" @endif><a href="{{ URL::action('UAController@index') }}">Users</a></li>
-                        <li @if (Request::segment(2) == 'shop') class="active" @endif><a href="{{ URL::action('ShopsController@index') }}">Shop</a></li>
+                        <li @if (Request::segment(2) == 'shop') class="active" @endif><a href="{{ URL::action('ShopsController@index') }}">Product</a></li>
                         <li @if (Request::segment(2) == 'prepaid') class="active" @endif><a href="{{ URL::action('AdministratorController@getPrepaid') }}">Prepaid Cards</a></li>
                         <li @if (Request::segment(2) == 'order') class="active" @endif><a href="{{ URL::action('AdministratorController@getOrder') }}">Customer Orders</a></li>
                         <li @if (Request::segment(2) == 'slider') class="active" @endif><a href="{{ URL::action('AdministratorController@getSlider') }}">Slider</a></li>

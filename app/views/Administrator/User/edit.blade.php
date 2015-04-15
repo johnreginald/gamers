@@ -6,7 +6,6 @@
         <h3 class="page-header">
             Edit User Detail
         </h3>
-        <hr>
     </div>
 </div>
 
