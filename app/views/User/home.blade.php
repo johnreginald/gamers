@@ -60,11 +60,11 @@
                             </ul>
                         </div>
                         <div class="panel-body">
-                            foreach ($contents as $c)
-                            <h4> $c->post_title </h4>
-                            <p> $c->post_content </p>
+                            @foreach ($posts as $post)
+                            <h4><a href="{{ URL::to('post/') }}/{{ $post->id }}">{{ $post->title }}</a></h4>
+                            <p>{{ $post->content }}</p>
                             <hr>
-                            endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div> <!-- COL-MD-7 -->

@@ -15,7 +15,9 @@ return array(
 
     'post-restore' => 'Your Post is restored from Trash',
 
-    'trash-edit' => 'You can’t edit this item because it is in the Trash. Please restore it and try again.',
+//    'trash-edit' => 'You can’t edit this item because it is in the Trash. Please restore it and try again.',
+    
+    'trash-empty' => 'Posts in Trash are completely deleted!',
 
     'prepaid-generate' => 'Requrest Complete! 100 Prepaid Code Generated.',
 

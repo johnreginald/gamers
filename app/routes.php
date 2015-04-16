@@ -11,7 +11,7 @@
   |
 */
 
-// Route::get('post/{id}', 'ContentsController@view');
+Route::get('post/{id}', 'HomeController@single');
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLogout'));
 
@@ -52,21 +52,9 @@ Route::get('dashboard', 'AccountController@getIndex');
 Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function() {
 
     // Posts Management Route
-    Route::post('post/search', function(){
-        // $posts = Post::search(Input::get('search'));
-
-        $q = Input::get('search');
-        $posts = Post::where('title', 'LIKE', '%'. $q .'%')
-        ->orWhere('content', 'LIKE', '%'. $q .'%')
-        ->orWhere('author', 'LIKE', '%'. $q .'%')
-        ->get();
-
-        foreach ($posts as $p) {
-            echo $p->title . '<br>';
-            echo $p->author . '<br>';
-            echo $p->content . '<hr>';
-        }
-    });
+    Route::post('post/search', 'PostsController@search');
+    Route::post('post/restore', 'PostsController@restore');
+    Route::post('post/trash', 'PostsController@trash');
     Route::resource('post', 'PostsController');
 
     // Users Management Route

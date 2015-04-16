@@ -3,8 +3,12 @@
 class HomeController extends BaseController {
 
     public function index() {
-	    $contents = Post::type('post')->published()->get();
-        return View::make('User.home', compact('contents'));
+        $posts = Post::onlyPublish();
+        return View::make('User.home')->withPosts($posts);
     }
-
+    
+    public function single($id) {
+        $posts = Post::findOrFail($id);
+        return View::make('User.single')->withPost($posts);
+    }
 }
