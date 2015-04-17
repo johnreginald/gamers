@@ -1,20 +1,19 @@
 TODO
 
 ADMINISTRATOR
-	- Content Controller // Readd
+	- Content Controller // DONE
 	- Slider // DONE
 	- Advertisement
 	- Sponsor // DONE
 	- Gamer TV
-	- Image on Item
+	- Image on Item // DONE
 		- Feature Item ( radio input )
-		- Refactor to Product
-	- Item Categories
+		- Refactor to Product // DONE
+	- Item Categories 
 	- Website Settings
-	- Logging
 	- Order Management // Done
 	- Theme Settings // DONE
 Frontend
-	- Payment Plus and Minus
-	- Account History 
+	- Payment Plus and Minus // DONE
+	- Account History logging
 	- What's New? // DONE

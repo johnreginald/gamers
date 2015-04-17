@@ -92,7 +92,7 @@ class ProductsController extends \BaseController {
     }
 
     public function the_shop() {
-        $products = Product::All();
+        $products = Product::paginate(9);
         return View::make('User.shop', compact('products'));
     }
 

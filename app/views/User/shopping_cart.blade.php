@@ -51,15 +51,18 @@
                 </tfoot>
             </table>
         </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ Form::open(array('url' => 'checkout', 'method' => 'POST', 'class' => 'form  pull-right')) }}
+                    <input type="submit" value="Checkout" class="btn btn-primary">
+                    {{ Form::close() }}
 
-        <div class="col-md-12">
-            {{ Form::open(array('url' => 'checkout', 'method' => 'POST', 'class' => 'form  pull-right')) }}
-            <input type="submit" value="Checkout" class="btn btn-primary">
-            {{ Form::close() }}
-
-            {{ Form::open(array('url' => 'clear-cart', 'method' => 'POST', 'class' => 'form')) }}
-            <input type="submit" value="Clear Cart" class="btn btn-danger">
-            {{ Form::close() }}
+                    {{ Form::open(array('url' => 'clear-cart', 'method' => 'POST', 'class' => 'form')) }}
+                    <input type="submit" value="Clear Cart" class="btn btn-danger">
+                    {{ Form::close() }}
+                </div>                
+            </div>
         </div>
         @else
         <div class="well">
@@ -68,4 +71,5 @@
         @endif        
     </div>
 </div>
+<br>
 @stop

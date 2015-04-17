@@ -13,7 +13,7 @@
     <div class="carousel-inner">
         @foreach($slider as $s)
             <div class="item @if($s->order == 1) active @endif">
-                <img src="{{ $s->url }}" style="height: 400px; width: 100%;" alt="">
+                <img src="{{ URL::to('/uploads/') }}/slider_{{ $s->url }}" alt="">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>{{ $s->title }}</h1>

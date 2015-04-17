@@ -15,7 +15,7 @@ class Post extends \Eloquent {
     protected $fillable = ['title', 'content', 'status', 'author'];
 
     public static function onlyPublish() {
-        return Post::where('status', '=', '1')->orderby('updated_at', 'desc')->get();
+        return Post::where('status', '=', '1')->orderby('updated_at', 'desc')->paginate(5);
     }
 
     public static function onlyDraft() {

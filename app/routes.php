@@ -109,6 +109,8 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
     Route::post('upload_plus', 'AdministratorController@upload_plus');
 
     Route::post('upload_ide', 'AdministratorController@upload_ide');
+    
+    Route::post('upload_slider', 'AdministratorController@upload_slider');
 
     // Root Route
     Route::get('/', 'AdministratorController@getIndex');

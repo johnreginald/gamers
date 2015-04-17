@@ -5,7 +5,8 @@
 	$('#ide').summernote({
 	        onImageUpload: function(files, editor, welEditable) {
 	            sendFile(files[0], editor, welEditable);
-	        }
+	        },
+                height: 300,
 	});
 
 	// send the file

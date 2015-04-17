@@ -43,7 +43,7 @@
         </tr>
         @empty
         <tr>
-            <td>Your Search Fail! Nothing Found.</td>
+            <td>Nothing Here Yet. Generate Some Prepaid Code.</td>
             <td></td>
             <td></td>
             <td></td>

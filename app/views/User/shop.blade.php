@@ -27,9 +27,12 @@
         {{ Form::close() }}
     </div>
 
+    {{ $products->links() }}
+
+    @foreach($products->chunk(3) as $p)
     <div class="row">
-        @forelse($products as $product)
-        <div class="col-md-3">
+        @foreach($p as $product)
+        <div class="col-md-4">
             <div class="thumbnail">
                 <img src="assets/img/1.jpg">
                 <div class="caption">
@@ -46,11 +49,8 @@
                 </div>
             </div>
         </div>
-        @empty 
-        <div class="col-md-12">
-            <p>Nothing Here Yet!</p>
-        </div>     
-        @endforelse
+        @endforeach
     </div>
+    @endforeach
 </div>	
 @stop

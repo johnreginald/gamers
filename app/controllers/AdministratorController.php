@@ -117,25 +117,44 @@ class AdministratorController extends BaseController {
         return Response::json(array('files' => $results));
     }
 
-    public function upload_plus() {
+    public function upload_slider() {
         $files = Input::file('files');
-        $assetPath = '/uploads';
+        $assetPath = 'uploads';
         $uploadPath = public_path($assetPath);
         $results = array();
         foreach ($files as $file) {
             $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
             // store our uploaded file in our uploads folder
             $file->move($uploadPath, $name);
-            Image::make($uploadPath . '/' . $name)->resize(150, 150)->save($uploadPath . "/150x150_" . $name);
+            Image::make($uploadPath . '/' . $name)->resize(250, 75)->save($uploadPath . "/250x75_" . $name);
+            Image::make($uploadPath . '/' . $name)->resize(1375, 400)->save($uploadPath . "/slider_" . $name);
             // set our results to have our asset path
             $results[] = array(
                 'name' => $name,
-                'url' => $assetPath . '/' . $name,
-                'thumbnailUrl' => $assetPath . '/' . '150x150_' . $name,
             );
         }
         return Response::json(array('files' => $results));
     }
+
+//    public function upload_plus() {
+//        $files = Input::file('files');
+//        $assetPath = '/uploads';
+//        $uploadPath = public_path($assetPath);
+//        $results = array();
+//        foreach ($files as $file) {
+//            $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
+//            // store our uploaded file in our uploads folder
+//            $file->move($uploadPath, $name);
+//            Image::make($uploadPath . '/' . $name)->resize(150, 150)->save($uploadPath . "/150x150_" . $name);
+//            // set our results to have our asset path
+//            $results[] = array(
+//                'name' => $name,
+//                'url' => $assetPath . '/' . $name,
+//                'thumbnailUrl' => $assetPath . '/' . '150x150_' . $name,
+//            );
+//        }
+//        return Response::json(array('files' => $results));
+//    }
 
     public function upload_ide() {
 
