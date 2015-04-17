@@ -9,7 +9,7 @@
   | It's a breeze. Simply tell Laravel the URIs it should respond to
   | and give it the Closure to execute when that URI is requested.
   |
-*/
+ */
 
 Route::get('post/{id}', 'HomeController@single');
 
@@ -25,7 +25,6 @@ Route::group(array('before' => 'logged_in'), function() {
 
     Route::get('reset', 'AccountController@getReset');
     Route::post('reset', 'AccountController@postReset');
-
 });
 
 Route::post('password', 'AccountController@postPassword');
@@ -36,13 +35,17 @@ Route::post('prepaid', 'AccountController@postPrepaid');
 
 // Frontend Shopping Cart Route
 
-Route::get('shop', 'ShopsController@the_shop');
+Route::get('shop', 'ProductsController@the_shop'); // Shop Route
 
-Route::post('shop-add', 'ShopsController@add_item');
+Route::get('item/{id}', 'ProductsController@detail'); // Single Product Detail
 
-Route::get('shopping-cart', 'ShopsController@shopping_cart');
+Route::post('shop-add', 'ProductsController@add_item');
 
-Route::post('checkout', 'ShopsController@checkout');
+Route::get('shopping-cart', 'ProductsController@shopping_cart');
+
+Route::post('checkout', 'ProductsController@checkout');
+
+Route::post('clear-cart', 'ProductsController@clear_cart');
 
 // Dashboard Route
 
@@ -55,6 +58,7 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
     Route::post('post/search', 'PostsController@search');
     Route::post('post/restore', 'PostsController@restore');
     Route::post('post/trash', 'PostsController@trash');
+    Route::get('post/preview/{id}', 'PostsController@preview');
     Route::resource('post', 'PostsController');
 
     // Users Management Route
@@ -63,9 +67,9 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
 
     Route::resource('user', 'UAController');
 
-    // Shop Controller Route
+    // Product Controller Route
 
-    Route::resource('shop', 'ShopsController');
+    Route::resource('product', 'ProductsController');
 
     // Prepaid Controller Route
 
@@ -108,7 +112,6 @@ Route::group(array('prefix' => 'administrator', 'before' => 'auth',), function()
 
     // Root Route
     Route::get('/', 'AdministratorController@getIndex');
-
 });
 
 Route::any('/', 'HomeController@index');

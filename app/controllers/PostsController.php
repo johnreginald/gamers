@@ -126,5 +126,10 @@ class PostsController extends \BaseController {
         Post::onlyTrashed()->forceDelete();
         return Redirect::action('PostsController@index')->withMessage(Lang::get('message.trash-empty'))->withStatus('info');
     }
+    
+    public function preview($id) {
+        $posts = Post::findOrFail($id);
+        return View::make('User.single')->withPost($posts);
+    }
 
 }

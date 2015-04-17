@@ -8,7 +8,7 @@ class HomeController extends BaseController {
     }
     
     public function single($id) {
-        $posts = Post::findOrFail($id);
+        $posts = Post::where('status', '=', '1')->findOrFail($id);
         return View::make('User.single')->withPost($posts);
     }
 }

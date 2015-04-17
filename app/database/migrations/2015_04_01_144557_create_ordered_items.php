@@ -18,7 +18,8 @@ class CreateOrderedItems extends Migration {
 			$table->integer('account_id');
 			$table->integer('item_id');
 			$table->integer('quantity');
-			$table->boolean('completed');
+			$table->boolean('status');
+                        $table->integer('total');
 			$table->timestamps();
 		});
 	}

@@ -30,4 +30,9 @@ class Post extends \Eloquent {
         return Post::where('title', 'LIKE', '%' . $q . '%')->orWhere('content', 'LIKE', '%' . $q . '%')->orWhere('author', 'LIKE', '%' . $q . '%')->get();
     }
 
+    public static function readmore($id) {
+        $post = Post::find($id);
+        return (strlen($post->content) > 200) ? substr($post->content, 0, 200) . ' <a href="' . URL::to('post') . "/" . $id .'">Read More</a>' : $post->content;
+    }
+
 }

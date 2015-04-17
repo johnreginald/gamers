@@ -1,7 +1,7 @@
 @extends('Administrator.layout')
 
 @section('content')
-    <button class="btn btn-primary" id="add">New Sponsor</button>
+    <button class="btn btn-primary btn-sm" id="add">New Sponsor</button>
     <hr>
     <!-- New Slider Form - Hidden on Window Load -->
     <div class="row" id="newform">

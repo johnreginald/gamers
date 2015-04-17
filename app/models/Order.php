@@ -10,13 +10,13 @@ class Order extends Eloquent {
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = ['id', 'account_id', 'item_id', 'quantity'];
-
-	public function account() {
-		return $this->belongsTo('Account');
-	}
-
-	public function shop() {
-		return $this->belongsTo('Shop', 'item_id');
-	}
+	protected $fillable = ['id', 'account_id', 'item_id', 'quantity', 'total'];
+        
+        public function product() {
+            return $this->belongsTo('Product', 'item_id');
+        }
+        
+        public function account() {
+            return $this->belongsTo('Account', 'account_id');
+        }
 }

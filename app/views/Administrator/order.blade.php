@@ -17,25 +17,30 @@
             <th>Quantity</th>
             <th>Amount</th>
             <th>Delivery Status</th>
+            <th>Action</th>
         </tr>
     </thead>
 
     <tbody>
-		@foreach($order as $o)
+        @foreach($order as $o)
         <tr>
             <td>{{ $o->account->username }}</td>
-            <td>{{ $o->shop->name }}</td>
+            <td>{{ $o->product->name }}</td>
             <td>{{ $o->quantity }}</td>
-            <td>$50,000</td>
+            <td>{{ $o->total }}</td>
             <td>
-                @if($o->completed > 0)
-                    <span class="text-success">Delivered</span>
+                @if($o->status > 0)
+                <span class="text-success">Delivered <small>[ 2012 ]</small></span>
                 @else
-                    <span class="text-info">Wating</span>
+                <span class="text-info">Wating</span>
                 @endif
             </td>
-       </tr>
-		@endforeach
+            <td>
+                <button class="btn btn-success btn-xs">Mark as Complete</button>
+                <button class="btn btn-danger btn-xs">Cancel</button>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 

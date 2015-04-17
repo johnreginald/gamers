@@ -7,7 +7,7 @@ class AdministratorController extends BaseController {
     }
 
     public function getPrepaid() {
-        $prepaid = Prepaid::paginate(20);        
+        $prepaid = Prepaid::paginate(20);
         return View::make('Administrator.prepaid', compact('prepaid'));
     }
 
@@ -25,7 +25,7 @@ class AdministratorController extends BaseController {
                 'serial' => $serial,
                 'code' => strtoupper(sha1(rand())),
                 'status' => FALSE
-                );
+            );
             Prepaid::create($data);
             $serial++;
         }
@@ -34,10 +34,10 @@ class AdministratorController extends BaseController {
 
     public function prepaid_search() {
         $prepaid = DB::table('prepaids')
-                ->where(function($query){
+                ->where(function($query) {
                     $query->orWhere('serial', 'LIKE', '%' . Input::get('search') . '%')
                     ->orWhere('code', 'LIKE', '%' . Input::get('search') . '%')
-                    ->orWhere('used_by', 'LIKE', '%' . Input::get('search') .'%');
+                    ->orWhere('used_by', 'LIKE', '%' . Input::get('search') . '%');
                 })
                 ->get();
         return View::make('Administrator.prepaid', compact('prepaid'));
@@ -48,9 +48,7 @@ class AdministratorController extends BaseController {
     public function getOrder() {
 
         $order = Order::All();
-        
         return View::make('Administrator.order')->with('order', $order);
-
     }
 
     // Slider Function
@@ -58,8 +56,7 @@ class AdministratorController extends BaseController {
     public function getSlider() {
 
         $slider = Slider::All();
-        return View::make('Administrator.slider', compact('slider') );
-
+        return View::make('Administrator.slider', compact('slider'));
     }
 
     public function postSlider() {
@@ -78,8 +75,7 @@ class AdministratorController extends BaseController {
     public function getSponsor() {
 
         $slider = Slider::All();
-        return View::make('Administrator.sponsor', compact('slider') );
-
+        return View::make('Administrator.sponsor', compact('slider'));
     }
 
     public function postSponsor() {
@@ -92,6 +88,7 @@ class AdministratorController extends BaseController {
         $slider->save();
         return Redirect::to('administrator/slider');
     }
+
     // Website Settings
 
     public function getSettings() {
@@ -113,9 +110,9 @@ class AdministratorController extends BaseController {
             // set our results to have our asset path
             $results[] = array(
                 'name' => $assetPath . '/' . '150x150_' . $name,
-                // 'url' => $assetPath . '/' . $name,
-                // 'thumbnailUrl' => $assetPath . '/' . '150x150_' . $name,
-                );
+                    // 'url' => $assetPath . '/' . $name,
+                    // 'thumbnailUrl' => $assetPath . '/' . '150x150_' . $name,
+            );
         }
         return Response::json(array('files' => $results));
     }
@@ -135,7 +132,7 @@ class AdministratorController extends BaseController {
                 'name' => $name,
                 'url' => $assetPath . '/' . $name,
                 'thumbnailUrl' => $assetPath . '/' . '150x150_' . $name,
-                );
+            );
         }
         return Response::json(array('files' => $results));
     }
@@ -149,12 +146,12 @@ class AdministratorController extends BaseController {
         $move = $file->move($uploadPath, $name);
         Image::make($uploadPath . '/' . $name)->resize(150, 150)->save($uploadPath . "/150x150_" . $name);
 
-        if($move) {
-             return Response::json("/uploads/" . $name);
+        if ($move) {
+            return Response::json("/uploads/" . $name);
 //            echo "/uploads/" . $name;
         } else {
             return Response::json(['error' => true]);
         }
-
     }
+
 }

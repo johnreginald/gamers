@@ -57,7 +57,11 @@
                             {{ Form::open(array('url' => 'administrator/post/' . $a->id, 'method' => 'POST', 'class' => 'form')) }}
                             {{ Form::hidden('_method', 'DELETE') }}
                             <a href="{{ URL::to('administrator/post/' . $a->id . '/edit') }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                            <a href="{{ URL::to('post/' . $a->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</a>                            
+                            @if($a->status == 'publish')
+                            <a href="{{ URL::to('post/' . $a->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</a>    
+                            @else
+                            <a href="{{ URL::to('administrator/post/preview/' . $a->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> Preview</a>    
+                            @endif
                             <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span> Trash</button>
                             {{ Form::close() }}
                         </div>
@@ -97,10 +101,10 @@
                     <td>{{ $publish->created_at }}</td>
                     <td class="col-md-3">
                         <div class="pull-left">
-                            {{ Form::open(array('url' => 'administrator/post/' . $a->id, 'method' => 'POST', 'class' => 'form')) }}
+                            {{ Form::open(array('url' => 'administrator/post/' . $publish->id, 'method' => 'POST', 'class' => 'form')) }}
                             {{ Form::hidden('_method', 'DELETE') }}
-                            <a href="{{ URL::to('administrator/post/' . $a->id . '/edit') }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                            <a href="{{ URL::to('post/' . $a->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</a>                            
+                            <a href="{{ URL::to('administrator/post/' . $publish->id . '/edit') }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <a href="{{ URL::to('post/' . $publish->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</a>                            
                             <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span> Trash</button>
                             {{ Form::close() }}							
                         </div>
@@ -140,10 +144,10 @@
                     <td>{{ $draft->created_at }}</td>
                     <td class="col-md-3">
                         <div class="pull-left">
-                            {{ Form::open(array('url' => 'administrator/post/' . $a->id, 'method' => 'POST', 'class' => 'form')) }}
+                            {{ Form::open(array('url' => 'administrator/post/' . $draft->id, 'method' => 'POST', 'class' => 'form')) }}
                             {{ Form::hidden('_method', 'DELETE') }}
-                            <a href="{{ URL::to('administrator/post/' . $a->id . '/edit') }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                            <a href="{{ URL::to('post/' . $a->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> Preview</a>                            
+                            <a href="{{ URL::to('administrator/post/' . $draft->id . '/edit') }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <a href="{{ URL::to('administrator/post/preview/' . $draft->id) }}" target="_blank" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span> Preview</a>                            
                             <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span> Trash</button>
                             {{ Form::close() }}						
                         </div>

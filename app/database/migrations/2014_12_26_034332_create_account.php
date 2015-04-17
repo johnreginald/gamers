@@ -18,6 +18,7 @@ class CreateAccount extends Migration {
                 $table->string('username', 255)->unique('username');
                 $table->string('password', 60);
                 $table->string('email', 255)->unique('email');
+                $table->integer('credit');
                 $table->timestamps();
                 $table->rememberToken();
                 $table->softDeletes();

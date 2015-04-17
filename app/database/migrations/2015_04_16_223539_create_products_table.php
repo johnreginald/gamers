@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePrepaidsTable extends Migration {
+class CreateProductsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,12 @@ class CreatePrepaidsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('prepaids', function(Blueprint $table)
+		Schema::create('products', function(Blueprint $table)
 		{
-			$table->string('serial', 15);
-			$table->string('code', 15);
-			$table->integer('used_by')->nullable();
-			$table->boolean('status');
+			$table->increments('id');
+			$table->string('name', 255);
+			$table->text('description');
+			$table->integer('price');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +30,7 @@ class CreatePrepaidsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('prepaids');
+		Schema::drop('products');
 	}
 
 }

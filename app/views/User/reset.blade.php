@@ -18,12 +18,11 @@
                 <input type="submit" class="col-md-12 btn btn-primary" value="Reset Account">
 
                 {{ Form::close() }}
-
-                <span><br></span>
-
-                <div class="pull-left"><a href="{{ URL::to('register') }}">Register an Account</a></div>
-                <div class="pull-right"><a href="{{ URL::to('login') }}">Already a Member?</a> </div>
-
+                <br>
+                <div class="wrapper">
+                    <div class="pull-left"><a href="{{ URL::to('register') }}">Register an Account</a></div>
+                    <div class="pull-right"><a href="{{ URL::to('login') }}">Already a Member?</a> </div>
+                </div>
             </div>
         </div>
 

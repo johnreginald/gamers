@@ -20,6 +20,12 @@ return array(
     'trash-empty' => 'Posts in Trash are completely deleted!',
 
     'prepaid-generate' => 'Requrest Complete! 100 Prepaid Code Generated.',
+    
+    'prepaid-success' => '500 Credit added to Your Account. Thank for Buying.',
+    
+    'shop-fail' => 'You need more credit to buy this item. Please Buy more Credit.',
+    
+    'shop-success'  => 'Your Checkout is successful. Please wait for Delivery. Thank for Buying with us.',
 
     'upload-success' => 'Your File is successfully uploaded!',
 );

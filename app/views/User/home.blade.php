@@ -62,7 +62,7 @@
                         <div class="panel-body">
                             @foreach ($posts as $post)
                             <h4><a href="{{ URL::to('post/') }}/{{ $post->id }}">{{ $post->title }}</a></h4>
-                            <p>{{ $post->content }}</p>
+                            <p>{{ Post::readmore($post->id) }}</p>
                             <hr>
                             @endforeach
                         </div>

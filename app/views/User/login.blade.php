@@ -24,12 +24,12 @@
                 <input type="submit" class="col-md-12 btn btn-primary" value="Login">
 
                 {{ Form::close() }}
+                <br>
+                <div class="wrapper">
+                    <div class="pull-left"><a href="{{ URL::to('register') }}">Register an Account</a></div>
+                    <div class="pull-right"><a href="{{ URL::to('reset') }}">Forgot Password?</a> </div>
+                </div>
 
-                <span><br></span>
-
-                <div class="pull-left"><a href="{{ URL::to('register') }}">Register an Account</a></div>
-                <div class="pull-right"><a href="{{ URL::to('reset') }}">Forgot Password?</a> </div>
-                
             </div>
         </div>
 

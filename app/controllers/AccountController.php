@@ -3,9 +3,11 @@
 class AccountController extends BaseController {
 
     public function getIndex() {
-        // $order = Order::findOrFail(Auth::id());
-        // return View::make('User.dashboard')->with('order', $order);
-        return View::make('User.dashboard');
+        $data = array(
+            'orders' => Order::where('account_id', '=', Auth::id())->get(),
+            'new_products' => Product::orderby('created_at', 'desc')->take(6)->get(),
+        );
+        return View::make('User.dashboard', $data);
     }
 
     // LOGIN MECHANISM
@@ -98,10 +100,17 @@ class AccountController extends BaseController {
 
     public function postPrepaid() {
         $data = array(
-            'used_by' => Auth::user()->username,
+            'used_by' => Auth::id(),
             'status' => TRUE,
-            );
+        );
+        // Set Prepaid Card as Used
         Prepaid::where('serial', Input::get('serial'))->where('code', Input::get('code'))->update($data);
+        
+        // Add Credit to Account
+        $account = Account::find(1);
+        $account->credit = $account->credit + 500;
+        $account->save();
+        return Redirect::to('dashboard')->withMessage(Lang::get('message.prepaid-success'))->withStatus('success');
     }
 
     public function postEmail() {
@@ -112,7 +121,7 @@ class AccountController extends BaseController {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-           return Redirect::back()->withErrors($validator);
+            return Redirect::back()->withErrors($validator);
         } else {
             if (Input::get('newemail') == $user->email) {
                 echo "Type New Email";

@@ -43,7 +43,7 @@
                 <hr>
                 <input type="submit" class="btn btn-success btn-sm" value="Update">
                 <div class="pull-right">
-                    <a href="{{ URL::to('post/' . $content->id) }}" target="_blank" class="btn btn-info btn-sm">View Post</a> 
+                    <a href="{{ URL::to('administrator/post/preview/' . $content->id) }}" target="_blank" class="btn btn-info btn-sm">View Post</a> 
                 </div>
             </div>
             {{ Form::close() }}

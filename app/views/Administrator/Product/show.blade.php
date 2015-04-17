@@ -1,1 +1,0 @@
-/var/www/html/Gamers/app/views/shops/show.blade.php

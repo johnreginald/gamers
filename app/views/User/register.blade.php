@@ -32,15 +32,16 @@
                 @else
                 <div class="form-group"><input type="password" name="password_confirmation" class="form-control" placeholder="Verify Password" required></div>
                 @endif
-                
+
                 <input type="submit" class="col-md-12 btn btn-primary" value="Register">
 
                 {{ Form::close() }}
 
-                <span><br></span>
-
-                <div class="pull-left"><a href="{{ URL::to('login') }}">Already a Member</a></div>
-                <div class="pull-right"><a href="{{ URL::to('reset') }}">Forgot Password?</a> </div>             
+                <br>
+                <div class="wrapper">
+                    <div class="pull-left"><a href="{{ URL::to('login') }}">Already a Member</a></div>
+                    <div class="pull-right"><a href="{{ URL::to('reset') }}">Forgot Password?</a> </div>
+                </div>
             </div>
         </div>
 

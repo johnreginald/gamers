@@ -1,21 +1,10 @@
-@extends('User.layout')
-
-@section('content')
-<div class="container wrapper">
-    <div class="row">
-        <div class="col-md-7 login-form">
-            <div class="col-md-12">
-                <div class="alert alert-{{ $status }}">{{ $message }}</div>
-            </div>
-        </div>
-
-        <div class="col-md-5">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    Panel content
-                </div>
-            </div>
-        </div>
-    </div>
-</div>	
-@stop
+@if ( Session::get('message') )
+<div class="row">
+	<div class="col-lg-12">
+		<div class="alert alert-{{ Session::get('status') }} alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{ Session::get('message') }}
+		</div>
+	</div>
+</div>
+@endif

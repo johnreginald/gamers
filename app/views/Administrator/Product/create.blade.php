@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-	{{ Form::open(array('url' => 'administrator/shop', 'method' => 'POST', 'class' => 'form')) }}
+	{{ Form::open(array('url' => 'administrator/product', 'method' => 'POST', 'class' => 'form')) }}
 	<div class="col-md-9">
 		<div class="form-group">
 			<input type="text" name="name" class="form-control" placeholder="Item Name..." required autofocus>
@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="form-group">
-			<textarea name="description" rows="10" class="form-control" placeholder="Description"></textarea>
+			<textarea id="ide" name="description"></textarea>
 		</div>
 	</div>
 
@@ -30,10 +30,12 @@
 			<div class="panel-heading">Options</div>
 
 			<div class="panel-body">
-        		<button type="submit" name="submit" class="btn btn-success pull-left" />Add Item</button>
+        		<button type="submit" name="submit" class="btn btn-success pull-left" />Add Product</button>
 			</div>
 		</div>
 	</div>
 	{{ Form::close() }}
 </div>
+
+@include('Administrator.script')
 @stop
