@@ -1,5 +1,11 @@
 @extends('Administrator.layout')
 	
 @section('content')
-	This is Website Settings
+<section class="content-header">
+	    <h1>Website Settings</h1>
+	</section>
+	
+	<section class="content">
+		Working in Progress
+	</section>	
 @stop

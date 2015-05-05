@@ -17,23 +17,40 @@ class AccountController extends BaseController {
     }
 
     public function postLogin() {
-        $rules = array(
-            'username' => 'required|min:4',
-            'password' => 'required|alpha_num'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Config::get('validation.login'));
 
         if ($validator->fails()) {
             return Redirect::to('login')->withErrors($validator)->withInput(Input::except('password'));
         } else {
-            $userdata = array(
-                'username' => Input::get('username'),
-                'password' => Input::get('password')
-            );
-            if (Auth::attempt($userdata)) {
-                return Redirect::intended();
-            } else {
-                return Redirect::to('login');
+            try
+            {
+                $credentials = array(
+                    'username' => Input::get('username'),
+                    'password' => Input::get('password')
+                );
+
+                Sentry::authenticate($credentials, false);
+                return Redirect::to('dashboard');
+            }
+            catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
+            {
+                return Redirect::to('login')->withMessage(Lang::get('message.login-wrong'))->withStatus('info');
+            }
+            catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+            {
+                return Redirect::to('login')->withMessage(Lang::get('message.login-not-found'))->withStatus('danger');
+            }
+            catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
+            {
+                return Redirect::to('login')->withMessage(Lang::get('message.login-not-activated'))->withStatus('danger');
+            }
+            catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
+            {
+                return Redirect::to('login')->withMessage(Lang::get('message.login-suspended'))->withStatus('danger');
+            }
+            catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
+            {
+                return Redirect::to('login')->withMessage(Lang::get('message.login-banned'))->withStatus('danger');
             }
         }
     }
@@ -46,31 +63,30 @@ class AccountController extends BaseController {
 
     public function postRegister() {
 
-        $rules = array(
-            'username' => 'unique:accounts|required|min:4',
-            'email' => 'unique:accounts|required|email',
-            'password' => 'required|alpha_num|between:4,30|confirmed',
-            'password_confirmation' => 'required|alpha_num|between:4,30'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Config::get('validation.register'));
 
         if ($validator->fails()) {
             return Redirect::to('register')->withErrors($validator)->withInput(Input::except('password', 'password_confirmation'));
         } else {
-            $account = new Account;
-            $account->username = Input::get('username');
-            $account->password = Hash::make(Input::get('password'));
-            $account->email = Input::get('email');
-            $account->save();
-            return View::make('User.message')->with(array('message' => Lang::get('message.success'), 'status' => 'success'));
+            $user = Sentry::register(array(
+                'username' => Input::get('username'),
+                'password' => Input::get('password'),
+                'email' => Input::get('email')
+            ));
+            // TODO
+            // $activationCode = $user->getActivationCode();
+            Mail::send('emails.welcome', array('key' => 'value'), function($message)
+            {
+                $message->to(Input::get('email'), Input::get('username'))->subject('Welcome!');
+            });
+            return Redirect::to('login')->withMessage(Lang::get('message.register-success'))->withStatus('success');
         }
     }
 
     // LOGOUT FUNCTION
 
     public function getLogout() {
-        Auth::logout();
+        Sentry::logout();
         return Redirect::to('/');
     }
 
@@ -81,19 +97,20 @@ class AccountController extends BaseController {
     }
 
     public function postReset() {
-        $rules = array(
-            'email' => 'required|email'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Config::get('validation.reset'));
 
         if ($validator->fails()) {
             return Redirect::to('reset')->withErrors($validator);
         } else {
-            $user = DB::table('users')->where('email', Input::get('email'))->count();
-            if ($user == 1) {
-                return View::make('portal/message')->with('message', sha1(Input::get('email')));
+            $sentry = Sentry::getUserProvider()->getEmptyUser();
+            if($sentry->where('email', '=', Input::get('email'))->first()) {
+                Mail::send('emails.welcome', array('key' => 'value'), function($message)
+                {
+                    $message->to(Input::get('email'), Input::get('email'))->subject('Welcome!');
+                });
+                return Redirect::to('reset')->withMessage(Lang::get('message.reset-success'))->withStatus('success');
             } else {
-                return View::make('portal/auth/reset')->with('notfound', "Your ->where('password', '=', Hash::make(Input::get('oldpassword')))Email Address is not registered");
+                return Redirect::to('reset')->withMessage(Lang::get('message.reset-fail'))->withStatus('info');
             }
         }
     }
@@ -113,12 +130,10 @@ class AccountController extends BaseController {
         return Redirect::to('dashboard')->withMessage(Lang::get('message.prepaid-success'))->withStatus('success');
     }
 
+// TODO FUNCTIONS
     public function postEmail() {
         $user = Auth::user();
-        $rules = array(
-            'newemail' => 'unique:accounts,email|required|email'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Config::get('validation.email'));
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);

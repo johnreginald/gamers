@@ -99,6 +99,7 @@
         </div> <!-- ADVERTISEMENT AREA END -->
     </div> <!-- ROW END -->
 </div> <!-- Wrapper End -->
+
 <script src="{{ URL::to('assets/js/holder.js') }}"></script>
 
 <script>

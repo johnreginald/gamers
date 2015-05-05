@@ -1,45 +1,29 @@
-{{ HTML::style('assets/css/summernote.css') }}
-{{ HTML::script('assets/js/summernote.js') }}
+{{ HTML::style('assets/css/font-awesome.min.css') }}
+{{ HTML::style('editor/css/froala_style.min.css') }}
+{{ HTML::style('editor/css/froala_editor.min.css') }}
+{{ HTML::script('editor/js/froala_editor.min.js')}}
+{{ HTML::script('editor/js/plugins/media_manager.min.js')}}
+{{ HTML::script('editor/js/plugins/tables.min.js')}}
+{{ HTML::script('editor/js/plugins/video.min.js')}}
 
-<script type="text/javascript">
-	$('#ide').summernote({
-	        onImageUpload: function(files, editor, welEditable) {
-	            sendFile(files[0], editor, welEditable);
-	        },
-                height: 300,
-	});
-
-	// send the file
-
-	function sendFile(file, editor, welEditable) {
-	        data = new FormData();
-	        data.append("file", file);
-	        $.ajax({
-	            data: data,
-	            type: 'POST',
-	            xhr: function() {
-	                var myXhr = $.ajaxSettings.xhr();
-	                if (myXhr.upload) myXhr.upload.addEventListener('progress',progressHandlingFunction, false);
-	                return myXhr;
-	            },
-	            url: 'http://127.0.0.1/administrator/upload_ide',
-	            cache: false,
-	            contentType: false,
-	            processData: false,
-	            success: function(url) {
-	                editor.insertImage(welEditable, url);
-	            }
-	        });
-	}
-
-    // update progress bar
-    function progressHandlingFunction(e){
-        if(e.lengthComputable){
-            $('progress').attr({value:e.loaded, max:e.total});
-            // reset progress on complete
-            if (e.loaded == e.total) {
-                $('progress').attr('value','0.0');
-            }
-        }
-    }
+<script>
+  $(function() {
+      $('#ide').editable({
+      	inlineMode: false,
+      	height: 500,
+      	buttons: [
+      		'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'removeFormat', 'formatBlock',
+      		'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 
+      		'outdent', 'indent', 'createLink', 'insertImage', 'insertVideo', 'table', 
+      		'undo', 'redo', 'html', 'insertHorizontalRule'
+      		],
+      	placeholder: 'Write Something',
+      	imagesLoadURL: "{{ URL::to('/') }}/administrator/images/load",
+      	imageDeleteURL: "{{ URL::to('/') }}/administrator/images/delete",
+      	imageUploadURL: "{{ URL::to('/') }}/administrator/images/upload",
+      	imageUploadParams: {
+        	id: 'my_editor'
+      	}
+      })
+  });
 </script>

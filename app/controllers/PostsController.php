@@ -34,7 +34,7 @@ class PostsController extends \BaseController {
     public function store() {
         $data = array(
             'title' => Input::get('title'),
-            'author' => Auth::user()->username,
+            'author' => Sentry::getUser()->username,
             'content' => Input::get('content'),
             'status' => Input::get('status')
         );
@@ -130,6 +130,38 @@ class PostsController extends \BaseController {
     public function preview($id) {
         $posts = Post::findOrFail($id);
         return View::make('User.single')->withPost($posts);
+    }
+
+    /* ===  Media Manager Functions === */
+    public function load_images() {
+        $dir = 'uploads/';
+        $FILES = array();
+        if(file_exists($dir)) {
+            foreach (glob($dir . "{*.gif,*.jpeg,*.jpg,*.pjpeg,*.png}", GLOB_BRACE) as $files) {
+                $FILES[] = URL::to('/') . '/' . $files;
+            }
+            return Response::json($FILES);   
+        } else {
+            return Response::json(array('error' => "Images folder does not exist!"));
+        }        
+    }
+
+    public function delete_images() {
+        $src = str_replace(URL::to('/') . "/", '', Input::get('src'));
+        if (file_exists($src)) {
+            unlink($src);
+        }
+    }
+
+    public function upload_images() {
+        $file = Input::file('file');
+        $assetPath = '/uploads';
+        $uploadPath = public_path($assetPath);
+        $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
+        // Save Images
+        $file->move($uploadPath, $name);
+        $response = $assetPath . '/' . $name;
+        return Response::json(array('response' => $response));
     }
 
 }

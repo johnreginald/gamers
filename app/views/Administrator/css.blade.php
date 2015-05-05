@@ -1,11 +1,14 @@
 	<!-- Bootstrap Core CSS -->
-	{{ HTML::style('assets/css/bootstrap.cosmo.min.css') }}
-	{{ HTML::style('assets/css/db.css') }}
+	{{ HTML::style('assets/css/bootstrap.default.min.css') }}
+	{{ HTML::style('assets/css/font-awesome.min.css') }}
+	{{ HTML::style('admin/dist/css/AdminLTE.css') }}
+	{{ HTML::style('admin/dist/css/skins/skin-blue.min.css') }}
+	<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
 	<!-- jQuery -->
 	{{ HTML::script('assets/js/jquery.js') }}
 	{{ HTML::script('assets/js/bootstrap.min.js') }}
-
+	{{ HTML::script('admin/dist/js/app.min.js') }}
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

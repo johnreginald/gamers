@@ -1,8 +1,12 @@
 @extends('User.layout')
 
 @section('content')
+
 <div class="container wrapper">
     <div class="row">
+        
+        @include('User.message')
+
         <div class="col-md-7 login-form">
             <div class="col-md-7 col-md-offset-1">
                 <h3>Login Form</h3>

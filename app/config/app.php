@@ -14,7 +14,6 @@ return array(
 	*/
 
 	'debug' => false,
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -125,6 +124,8 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
+		'Cartalyst\Sentry\SentryServiceProvider',
+		'Johnreginald\FroalaMediaManager\FroalaMediaManagerServiceProvider',
 	),
 
 	/*
@@ -194,7 +195,7 @@ return array(
 		'Cart'            	=> 'Gloudemans\Shoppingcart\Facades\Cart',
 		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
 		'Image'       		=> 'Intervention\Image\Facades\Image',
-
+		'Sentry' 			=> 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 	),
 
 );

@@ -27,6 +27,4 @@ return array(
 	*/
 
 	'theme' => 'paper',
-
-
 );

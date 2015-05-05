@@ -4,7 +4,7 @@ class UAController extends \BaseController {
 
 	public function index() 
 	{
-		$user = Account::all();
+		$user = Sentry::findAllUsers();
 
 		return View::make('Administrator.User.index', compact('user'));
 	}
@@ -56,7 +56,7 @@ class UAController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = Account::find($id);
+		$user = Sentry::findUserById($id);
 
 		return View::make('Administrator.User.edit', compact('user'));
 		

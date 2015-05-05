@@ -1,6 +1,6 @@
 <!-- CSS START HERE -->
 <!-- Generic page styles -->
-<link rel="stylesheet" href="{{ URL::to('/') }}/file/css/style.css">
+<!-- <link rel="stylesheet" href="{{ URL::to('/') }}/file/css/style.css"> -->
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="{{ URL::to('/') }}/file/css/jquery.fileupload.css">
 
@@ -21,7 +21,8 @@ $(document).ready(function () {
     });
 });
 
-$('#remove').click(function () {
+$('#remove').click(function (e) {
+    e.preventDefault();
     $('#files').empty();
     $('#url').empty();
     $('#uploadbutton').show();

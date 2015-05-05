@@ -1,13 +1,12 @@
 @extends('Administrator.layout')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header">
-            New Post
-        </h3>
-    </div>
-</div>
+<section class="content-header">
+    <h1>New Post</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
 <div class="row">
     {{ Form::open(array('url' => 'administrator/post', 'method' => 'POST', 'class' => 'form')) }}
     <div class="col-md-9">
@@ -32,6 +31,7 @@
     </div>
     {{ Form::close() }}
 </div>
+</section>
 
 @include('Administrator.script')
 @stop

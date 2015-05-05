@@ -1,17 +1,12 @@
 @extends('Administrator.layout')
 
 @section('content')
+<section class="content-header">
+    <h1>Edit Post</h1>
+</section>
 
+<section class="content">
 @include('Administrator.message')
-
-<div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header">
-            Edit Post
-        </h3>
-    </div>
-</div>
-
 <div class="row">
     {{ Form::open(array('url' => 'administrator/post/' . $content->id, 'method' => 'POST', 'class' => 'form')) }}
     {{ Form::hidden('_method', 'PUT') }}
@@ -56,6 +51,7 @@
         </div>
     </div>
 </div>
+</section>
 
 @include('Administrator.script')
 <script type="text/javascript">

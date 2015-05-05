@@ -1,7 +1,21 @@
 <?php
 
 return array(
-    'success' => 'Your Account is successfully created! Please Check your mailbox to activate your account.',
+    'register-success' => 'Your Account is successfully created! Please Check your mailbox to activate your account.',
+
+    'reset-fail' => "Your Account is not found in our Account Database",
+
+    'reset-success' => "We've sent you an Reset Email, Please Check Your Mailbox for more.",
+
+    'login-wrong' => 'Wrong password, try again.',
+
+    'login-not-found' => 'User not found.',
+
+    'login-not-activated' => 'Your Account is not activated yet.',
+
+    'login-suspended' => 'Your Account is suspended.',
+
+    'login-banned' => 'Your Account is banned.',
     
     'post-update' => 'Your Post is Updated.',
 

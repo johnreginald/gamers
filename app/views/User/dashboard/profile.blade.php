@@ -3,17 +3,17 @@
     <hr>
     <dl class="dl-horizontal">
         <dt>Username : </dt>
-        <dd>{{ ucfirst(Auth::user()->username) }}</dd>
+        <dd>{{ ucfirst(Sentry::getUser()->username) }}</dd>
     </dl>
 
     <dl class="dl-horizontal">
         <dt>Email Address : </dt>
-        <dd>{{ Auth::user()->email }}</dd>
+        <dd>{{ Sentry::getUser()->email }}</dd>
     </dl>  
 
     <dl class="dl-horizontal">
         <dt>Gamer Credit : </dt>
-        <dd>${{ Auth::user()->credit }}</dd>
+        <dd>${{ Sentry::getUser()->credit }}</dd>
     </dl> 
     <dl class="dl-horizontal">
         <dt>Last Sign In : </dt>

@@ -1,8 +1,8 @@
 @extends('User.layout')
 
 @section('content')
-<div class="container wrapper">
-    <div class="row">
+<div class="container">
+    <div class="row wrapper">
         <ol class="breadcrumb">
             <li><a href="{{ URL::to('/') }}">Home</a></li>
             <li class="active">{{ $post->title }}</li>
@@ -14,5 +14,5 @@
             </div>
         </div>
     </div>
-</div>	
+</div>
 @stop

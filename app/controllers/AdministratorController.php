@@ -56,10 +56,14 @@ class AdministratorController extends BaseController {
     public function getSlider() {
 
         $slider = Slider::All();
-        return View::make('Administrator.slider', compact('slider'));
+        return View::make('Administrator.Slider.index', compact('slider'));
     }
 
-    public function postSlider() {
+    public function getSliderCreate() {
+        return View::make('Administrator.Slider.create');
+    }
+
+    public function postSliderCreate() {
 
         $slider = new Slider;
         $slider->title = Input::get('title');
@@ -75,10 +79,14 @@ class AdministratorController extends BaseController {
     public function getSponsor() {
 
         $slider = Slider::All();
-        return View::make('Administrator.sponsor', compact('slider'));
+        return View::make('Administrator.Sponsor.index', compact('slider'));
     }
 
-    public function postSponsor() {
+    public function getSponsorCreate() {
+        return View::make('Administrator.Sponsor.create');
+    }
+
+    public function postSponsorCreate() {
 
         $slider = new Slider;
         $slider->title = Input::get('title');
@@ -155,22 +163,5 @@ class AdministratorController extends BaseController {
 //        }
 //        return Response::json(array('files' => $results));
 //    }
-
-    public function upload_ide() {
-
-        $file = Input::file('file');
-        $assetPath = '/uploads';
-        $uploadPath = public_path($assetPath);
-        $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
-        $move = $file->move($uploadPath, $name);
-        Image::make($uploadPath . '/' . $name)->resize(150, 150)->save($uploadPath . "/150x150_" . $name);
-
-        if ($move) {
-            return Response::json("/uploads/" . $name);
-//            echo "/uploads/" . $name;
-        } else {
-            return Response::json(['error' => true]);
-        }
-    }
 
 }
