@@ -16,12 +16,21 @@
 
             <li class="header">Webisite</li>
 
-            <li @if (Request::segment(2) == 'post') class="active" @endif>
-                <a href="{{ URL::action('PostsController@index') }}">Posts</a>
+            <li class="treeview">
+                <a href="#" @if (Request::segment(2) == 'post') class="active" @endif><span>Posts</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ URL::action('PostsController@index') }}">All Posts</a></li>
+                    <li><a href="{{ URL::action('PostsController@create') }}">Add Post</a></li>
+                    <li><a href="{{ URL::action('PostCategoriesController@index') }}">Categories</a></li>
+                </ul>
             </li>
-            
-            <li @if (Request::segment(2) == 'product') class="active" @endif>
-                <a href="{{ URL::action('ProductsController@index') }}">Product</a>
+
+            <li class="treeview">
+                <a href="#" @if (Request::segment(2) == 'product') class="active" @endif><span>Products</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ URL::action('ProductsController@index') }}">All Products</a></li>
+                    <li><a href="{{ URL::action('ProductsController@create') }}">Add Product</a></li>
+                </ul>
             </li>
             
             <li @if (Request::segment(2) == 'slider') class="active" @endif>
@@ -32,12 +41,28 @@
                 <a href="{{ URL::action('AdministratorController@getSponsor') }}">Sponsor</a>
             </li>
             
+            <li @if (Request::segment(2) == 'advertisement') class="active" @endif>
+                <a href="{{ URL::action('AdministratorController@getAdvertisement') }}">Advertisements</a>
+            </li>
+
             <li class="header">Users</li>    
             
             <li @if (Request::segment(2) == 'user') class="active" @endif>
                 <a href="{{ URL::action('UAController@index') }}">Users</a>
             </li>
-            
+
+            <li class="treeview">
+                <a href="#" @if (Request::segment(2) == 'reseller') class="active" @endif><span>Resellers</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ URL::action('AdministratorController@getReseller') }}">Applications</a></li>
+                    <li><a href="{{ URL::action('AdministratorController@getResellerProduct') }}">Approve Products</a></li>
+                </ul>
+            </li>        
+
+            <li @if (Request::segment(2) == 'message') class="active" @endif>
+                <a href="{{ URL::action('AdministratorController@getMessage') }}">Message Box</a>
+            </li>
+
             <li @if (Request::segment(2) == 'prepaid') class="active" @endif>
                 <a href="{{ URL::action('AdministratorController@getPrepaid') }}">Prepaid Cards</a>
             </li>

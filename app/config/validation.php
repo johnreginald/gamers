@@ -5,7 +5,7 @@
 	| Validation Rules
 	|--------------------------------------------------------------------------
 	|
-	| All Validation Rules
+	| Sentry Validation Rules
 	|
 	*/
 

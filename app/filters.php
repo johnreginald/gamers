@@ -33,34 +33,68 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('normal', function()
 {
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
+  if ( ! Sentry::check() ) {
+    return Redirect::to('login');
+  }
 });
 
-
-Route::filter('logged_in', function() {
-
-    if (Auth::check()) {
-        return Redirect::to('/');
-    }
-
-});
-
-Route::filter('auth.basic', function()
+Route::filter('reseller', function()
 {
-	return Auth::basic();
+  if ( ! Sentry::check() ) {
+    return Redirect::to('login');
+  } else {
+  	$user = Sentry::getUser();
+  	$resellers = Sentry::findGroupByName('Reseller');
+  	$admin = Sentry::findGroupByName('Administrator');
+  	if ( ! $user->inGroup($resellers) || ! $user->inGroup($admin) ) {
+    	return Redirect::to('/');
+  	}
+  }
 });
+
+Route::filter('administrator', function()
+{
+  if ( ! Sentry::check() ) {
+    return Redirect::to('login');
+  } else {
+  	$user = Sentry::getUser();
+  	$admin = Sentry::findGroupByName('Administrator');
+  	if ( ! $user->inGroup($admin) ) {
+    	return Redirect::to('/');
+  	}
+  }
+});
+
+// Route::filter('auth', function()
+// {
+// 	if (Auth::guest())
+// 	{
+// 		if (Request::ajax())
+// 		{
+// 			return Response::make('Unauthorized', 401);
+// 		}
+// 		else
+// 		{
+// 			return Redirect::guest('login');
+// 		}
+// 	}
+// });
+
+
+// Route::filter('logged_in', function() {
+
+//     if (Auth::check()) {
+//         return Redirect::to('/');
+//     }
+
+// });
+
+// Route::filter('auth.basic', function()
+// {
+// 	return Auth::basic();
+// });
 
 /*
 |--------------------------------------------------------------------------

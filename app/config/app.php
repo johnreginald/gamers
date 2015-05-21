@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -125,7 +125,7 @@ return array(
 		'Intervention\Image\ImageServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Johnreginald\FroalaMediaManager\FroalaMediaManagerServiceProvider',
+		'Mews\Purifier\PurifierServiceProvider',
 	),
 
 	/*
@@ -196,6 +196,8 @@ return array(
 		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
 		'Image'       		=> 'Intervention\Image\Facades\Image',
 		'Sentry' 			=> 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Purifier'			=> 'Mews\Purifier\Facades\Purifier',
+		'Carbon'            => 'Carbon\Carbon',
 	),
 
 );

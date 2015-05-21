@@ -3,14 +3,19 @@
     <hr>
     <div class="row">                             
         @forelse($new_products as $product)
-        <div class="col-sm-6 col-md-4">
+        <div class="col-md-4">
             <div class="thumbnail">
-                <img src="assets/img/1.jpg">
+                @if($product->image == NULL)
+                    <img data-src="holder.js/250x100/sky" alt="...">
+                @else
+                    <img src="{{ URL::to('uploads/products') }}/{{ $product->image }}">        
+                @endif
                 <div class="caption">
-                    <h5><a href="{{ URL::to('item/') }}/{{ $product->id }}">{{ $product->name }}</a></h5>
+                    <a href="{{ URL::to('item/') }}/{{ $product->id }}">{{ $product->name }}</a>
                     <p>
                         {{ Product::readmore($product->id) }}
                     </p>
+                    <p>Price: {{ $product->price }}</p>
                     <p>
                         {{ Form::open(array('url' => 'shop-add/', 'method' => 'POST', 'class' => 'form')) }}
                         <input type="hidden" name="id" value="{{ $product->id * 51235 }}">

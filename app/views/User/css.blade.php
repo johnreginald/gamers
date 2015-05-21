@@ -12,4 +12,7 @@
     <!-- JQuery -->
     {{ HTML::script('assets/js/jquery.js') }}
     {{ HTML::script('assets/js/bootstrap.min.js') }}
+    {{ HTML::script('assets/js/holder.js') }}
     
+    {{ HTML::style('assets/css/jbootstrap.css') }}
+    {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}

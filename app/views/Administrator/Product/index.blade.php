@@ -19,44 +19,31 @@
         </div>
         
         <div class="box-body">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th class="col-md-2">Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody class="">
-                    @forelse ($products as $product)
-                    <tr>
-                        <td><a href="{{ URL::to('administrator/product/' . $product->id . '/edit') }}"><img src="{{ asset('upload/product/test.jpg') }}" alt="..." class="img-thumbnail"></a></td>
-                        <td><a href="{{ URL::to('administrator/product/' . $product->id . '/edit') }}">{{ $product->name }}</a></td>
-                        <td>{{ $product->price }}</td>
-                        <td>
-                            <div class="pull-left">
-                                {{ Form::open(array('url' => 'administrator/product/' . $product->id, 'method' => 'POST', 'class' => 'form')) }}
-                                {{ Form::hidden('_method', 'DELETE') }}
-                                <input class="btn btn-danger btn-sm" name="delete" type="submit" value="Delete">
-                                {{ Form::close() }}
-                            </div>
-                            <div class="pull-right">
-                                <a href="{{ URL::to('administrator/product/' . $product->id) }}" class="btn btn-primary btn-sm">View</a>
-                            </div>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td>Not Product Yet</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            @foreach($products->chunk(4) as $p)
+            <div class="row">
+                @foreach($p as $product)
+                <div class="col-md-3">
+                    <div class="thumbnail">                            
+                        @if($product->image == NULL)
+                            <img data-src="holder.js/250x100/sky" alt="...">
+                        @else
+                            <img src="{{ URL::to('uploads/products') }}/{{ $product->image }}">        
+                        @endif
+                        <div class="caption">
+                        <a href="{{ URL::to('administrator/product/' . $product->id . '/edit') }}">{{ $product->name }}</a>
+                        <p>Price : {{ $product->price }}</p>
+                        <hr>
+                        {{ Form::open(array('url' => 'administrator/product/' . $product->id, 'method' => 'POST', 'class' => 'form')) }}
+                        {{ Form::hidden('_method', 'DELETE') }}
+                        <a href="{{ URL::to('administrator/product/' . $product->id . '/edit') }}" class="btn btn-info btn-sm">Edit</a>
+                        <input class="btn btn-danger btn-sm" name="delete" type="submit" value="Delete">
+                        {{ Form::close() }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endforeach
         </div>        
     </div>    
 </section>

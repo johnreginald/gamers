@@ -7,55 +7,29 @@
 <div class="container wrapper">
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Featured Items</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img data-src="holder.js/210x150/sky" alt="...">
-                                <div class="caption">
-                                    <a href="#">Item 2</a>
-                                    <p>Test Item 2</p>
-                                </div>
+            <div class="row">
+                @foreach($featured as $f)
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            @if ($f->image == 'NULL')
+                            <img data-src="holder.js/210x150/sky" alt="...">
+                            @else
+                            <img src="{{ URL::to('uploads/products') }}/{{ $f->image }}">
+                            @endif
+                            <div class="caption">
+                                <a href="{{ URL::to('item') }}/{{ $f->id }}">{{ $f->name }}</a>
+                                <p>Price: {{ $f->price }}</p>
                             </div>
                         </div>
-
-
-                        <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img data-src="holder.js/210x150/sky" alt="...">
-                                <div class="caption">
-                                    <a href="#">Item 2</a>
-                                    <p>Test Item 2</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img data-src="holder.js/210x150/sky" alt="...">
-                                <div class="caption">
-                                    <a href="#">Item 3</a>
-                                    <p>Test Item 3</p>
-                                </div>
-                            </div>
-                        </div>                             
-                    </div> <!-- Featured Area -->
-                </div>
-            </div> 
+                    </div>      
+                @endforeach
+            </div> <!-- Featured Area -->
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#top" data-toggle="tab">Top Stories</a></li>
-                                <li><a href="#news" data-toggle="news">Profile</a></li>
-                            </ul>
+                            <h3 class="panel-title">Announcements and News</h3>
                         </div>
                         @include('User.ajax_post')
                     </div>             
@@ -69,9 +43,11 @@
                     <h3 class="panel-title">Our Partners</h3>
                 </div>
                 <div class="panel-body">
-                    <img data-src="holder.js/320x150/lava" alt="Example Company">
-                    <hr>
-                    <img data-src="holder.js/320x150/sky" alt="Example Company">
+                    @forelse($sponsors as $sponsor)
+                        <img src="uploads/{{ $sponsor->url }}" class="img-thumbnail"><br><br>
+                    @empty
+                        Nothing Here Yet
+                    @endforelse
                 </div>
             </div>
 
@@ -80,22 +56,14 @@
                     <h3 class="panel-title">Advertisement Area</h3>
                 </div>
                 <div class="panel-body">
-                    <img data-src="holder.js/320x150/lava" alt="Example Company">
-                    <hr>
-                    <img data-src="holder.js/320x150/sky" alt="Example Company">
+                    @forelse($advertisements as $advertisement)
+                        <img src="uploads/{{ $advertisement->url }}" class="img-thumbnail"><br><br>
+                    @empty
+                        Nothing Here Yet
+                    @endforelse
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Advertisement Area</h3>
-                </div>
-                <div class="panel-body">
-                    <img data-src="holder.js/320x150/lava" alt="Example Company">
-                    <hr>
-                    <img data-src="holder.js/320x150/sky" alt="Example Company">
-                </div>
-            </div>                              
         </div> <!-- ADVERTISEMENT AREA END -->
     </div> <!-- ROW END -->
 </div> <!-- Wrapper End -->

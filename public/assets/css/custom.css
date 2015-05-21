@@ -18,6 +18,13 @@ footer {
     background-color: black;
     color: white;
 }
+#logo {
+    height: 50px;
+    width: 200px;
+    padding-top: 12px;
+    max-width: 200px;
+    max-height: 50px;
+}
 .login-form {
     border-radius: 5px;
     border: 1px solid #E5E5E5;
@@ -55,4 +62,9 @@ footer {
     padding: 19px;
     margin-bottom: 20px;
     background-color: #F5F5F5;
+}
+#social a {
+    font-size: 25px;
+    padding: 5px;
+    line-height: 0px;
 }

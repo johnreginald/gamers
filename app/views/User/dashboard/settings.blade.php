@@ -47,4 +47,12 @@
         </div>
     </div>
     <br>
+    @if(Reseller::where('user_id', '=', Sentry::getUser()->id)->count() == 0 && Sentry::getUser()->type == 0)
+    <hr>
+    <h5>Reseller Application</h5>
+    <p>Are you a Reseller Company? Send us an Application and wait for approval.</p>
+    {{ Form::open(array('url' => 'reseller/application', 'method' => 'POST', 'class' => 'form')) }}
+    <input type="submit" class="btn btn-primary" value="Send Application">
+    {{ Form::close() }}     
+    @endif
 </div>

@@ -1,0 +1,1 @@
+Your Product $name has been approved by Administrator. Thank you.

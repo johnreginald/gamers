@@ -18,6 +18,9 @@ class CreateProductsTable extends Migration {
 			$table->string('name', 255);
 			$table->text('description');
 			$table->integer('price');
+			$table->string('image', 255);
+			$table->integer('reseller');
+			$table->boolean('status');
 			$table->timestamps();
 		});
 	}

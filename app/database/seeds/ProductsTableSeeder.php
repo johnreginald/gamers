@@ -13,6 +13,7 @@ class ProductsTableSeeder extends Seeder {
                 'name' => "Item " . $faker->word,
                 'description' => $faker->text,
                 'price' => $faker->numberBetween(100, 10000),
+                'image' => NULL,
             ]);
         }
     }

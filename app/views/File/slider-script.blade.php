@@ -33,7 +33,7 @@ $('#remove').click(function (e) {
 $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
-    var url = 'upload_slider';
+    var url = "{{ URL::to('administrator/slider')}}/upload_slider";
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',

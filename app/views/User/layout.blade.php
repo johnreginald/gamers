@@ -19,7 +19,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ URL::to('/') }}">GAMERS</a>
+                    <a href="{{ URL::to('/') }}"><img src="{{ URL::to('assets/img/logo.png') }}" id="logo"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -28,7 +28,10 @@
                         <li><a href="#">About Us</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        @if(Auth::check())
+                        @if(Sentry::check())
+                            @if(Sentry::getUser()->inGroup(Sentry::findGroupByName('Reseller')))
+                            <li><a href="{{ URL::to('reseller') }}">Reseller Panel</a></li>
+                            @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -36,7 +39,7 @@
                                 <li><a href="{{ URL::to('logout') }}">Logout</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ URL::to('dashboard') }}#profile">Your Balance : ${{ Auth::user()->credit }}</a></li>
+                        <li><a href="{{ URL::to('dashboard') }}#profile">Your Balance : ${{ Sentry::getUser()->credit }}</a></li>
                         @else
                         <li><a href="{{ URL::to('register')}}">Register</a></li>
                         <li><a href="{{ URL::to('login')}}">Sign In</a></li>
@@ -53,19 +56,16 @@
 
         <footer>
             <div class="col-md-4">
-                <p>qweruqowieurpqowiuerpqiowuerpqiwuep</p>
+                <p>{{ Config::get('settings.left-footer') }}</p>
             </div>
 
             <div class="col-md-4">
                 <p>Copyright &copy; For Gamers By Gamers 2015 - 2016</p>
             </div>
 
-            <div class="col-md-4">
-                <h4>Follow Us</h4>
-                <span class="glyphicon glyphicon-bold"></span>
-                <span class="glyphicon glyphicon-bold"></span>
-                <span class="glyphicon glyphicon-bold"></span>
-                <span class="glyphicon glyphicon-bold"></span>
+            <div class="col-md-4" id="social">
+                <a href="http://facebook.com/{{ Config::get('settings.facebook') }}"><span class="fa fa-facebook"></span></a>
+                <a href="http://twitter.com/{{ Config::get('settings.twitter') }}"><span class="fa fa-twitter"></span></a>
             </div>
         </footer>
     </body>

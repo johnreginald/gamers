@@ -27,4 +27,11 @@ return array(
 	*/
 
 	'theme' => 'paper',
+
+	'facebook' => 'gamers',
+
+	'twitter' => 'twitter',
+
+	'left-footer' => "This is Right Footer",
+
 );

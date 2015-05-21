@@ -13,7 +13,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="img-thumbnail" src="{{ URL::to('uploads/linus-eff-you-640x363.png') }}">
+                    <img class="img-thumbnail" src="{{ URL::to('uploads/products') }}/{{ $product->image }}">
                     <hr>
                     {{ Form::open(array('url' => 'shop-add/', 'method' => 'POST', 'class' => 'form')) }}
                     <input type="hidden" name="id" value="{{ $product->id * 51235 }}">
@@ -21,7 +21,7 @@
                     {{ Form::close() }}
                 </div>
                 <div class="col-md-8">
-                    <h4>{{ $product->name }}</h4>
+                    <h5>{{ $product->name }}</h5>
                     <hr>
                     <dl class="dl-horizontal">
                         <dt>Price</dt>

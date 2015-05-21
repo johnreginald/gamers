@@ -17,3 +17,5 @@ Frontend
 	- Payment Plus and Minus // DONE
 	- Account History logging
 	- What's New? // DONE
+
+php artisan migrate:reset && php artisan migrate && php artisan migrate --package=cartalyst/sentry && php artisan db:seed

@@ -32,11 +32,17 @@ class UAController extends \BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput(Input::except('password', 'password_confirmation'));
         } else {
-            $account = new User;
-            $account->username = Input::get('username');
-            $account->password = Hash::make(Input::get('password'));
-            $account->email = Input::get('email');
-            $account->save();
+
+            $user = Sentry::create(array(
+                'username' => Input::get('username'),
+                'password' => Input::get('password'),
+                'email' => Input::get('email'),
+                'activated' => true,
+            ));
+
+		    $group = Sentry::findGroupByName('Administrator');
+		    $user->addGroup($group);
+		    
             return View::make('User.message')->with(array('message' => Lang::get('message.success'), 'status' => 'success'));
         }		
 	}

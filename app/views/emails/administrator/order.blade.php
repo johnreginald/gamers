@@ -1,0 +1,1 @@
+You got a new order for $product_name from $customer. Login and Check Administrator Panel.

@@ -8,7 +8,6 @@
         <li class="active">Shop</li>
     </ol>
     <div class="well">
-        <h5>Browse Our Shop</h5>
         {{ Form::open(array('url' => 'search', 'method' => 'POST', 'class' => 'form form-inline')) }}
         <div class="form-group">
             <input class="form-control" type="text" name="item-name" placeholder="Search Your Item">
@@ -23,23 +22,28 @@
             </select>
         </div>
 
-        <button class="btn btn-primary">Search</button>
+        <button class="btn btn-primary">Filter</button>
         {{ Form::close() }}
     </div>
 
     {{ $products->links() }}
 
-    @foreach($products->chunk(3) as $p)
+    @foreach($products->chunk(4) as $p)
     <div class="row">
         @foreach($p as $product)
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="thumbnail">
-                <img src="assets/img/1.jpg">
+                @if($product->image == NULL)
+                    <img data-src="holder.js/250x100/sky" alt="...">
+                @else
+                    <img src="{{ URL::to('uploads/products') }}/{{ $product->image }}">        
+                @endif
                 <div class="caption">
-                    <h3><a href="{{ URL::to('item/') }}/{{ $product->id }}">{{ $product->name }}</a></h3>
+                    <a href="{{ URL::to('item/') }}/{{ $product->id }}">{{ $product->name }}</a>
                     <p>
                         {{ Product::readmore($product->id) }}
                     </p>
+                    <p>Price: {{ $product->price }}</p>
                     <p>
                         {{ Form::open(array('url' => 'shop-add/', 'method' => 'POST', 'class' => 'form')) }}
                         <input type="hidden" name="id" value="{{ $product->id * 51235 }}">

@@ -34,8 +34,16 @@
                         @endif
                     </td>
                     <td>
-                        <button class="btn btn-success btn-xs">Mark as Complete</button>
-                        <button class="btn btn-danger btn-xs">Cancel</button>
+                        <div class="pull-left">
+                        {{ Form::open(array('url' => 'administrator/order/accept/' . $o->id, 'method' => 'POST', 'class' => 'form')) }}
+                            <input type="submit" class="btn btn-success btn-xs" value="Accept">
+                        {{ Form::close() }}
+                        </div>
+                        <div class="pull-right">
+                        {{ Form::open(array('url' => 'administrator/order/cancel/' . $o->id, 'method' => 'POST', 'class' => 'form')) }}
+                            <input type="submit" class="btn btn-danger btn-xs" value="Cancel">
+                        {{ Form::close() }}  
+                        </div>   
                     </td>
                 </tr>
                 @empty

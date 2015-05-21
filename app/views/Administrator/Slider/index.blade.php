@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="content-header">
-    <h1>Image Slider Code Management</h1>
+    <h1>Image Slider Management</h1>
 </section>
 
 <section class="content">
@@ -20,6 +20,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Order</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -30,6 +31,11 @@
                         <td>{{ $s->title }}</td>
                         <td>{{ $s->description }}</td>
                         <td>{{ $s->order }}</td>
+                        <td>
+                            {{ Form::open(array('url' => 'administrator/slider/delete/' . $s->id, 'method' => 'POST', 'class' => 'form')) }}
+                                <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                            {{ Form::close() }}
+                        </td>
                     </tr>
                     @empty
                     <tr>

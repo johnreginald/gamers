@@ -5,10 +5,12 @@ class Product extends \Eloquent {
     protected $table = "products";
     // Add your validation rules here
     public static $rules = [
-            // 'title' => 'required'
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'image',
     ];
     // Don't forget to fill this array
-    protected $fillable = ['name', 'price', 'description'];
+    protected $fillable = ['name', 'price', 'description', 'image'];
 
     public static function readmore($id) {
         $product = Product::find($id);

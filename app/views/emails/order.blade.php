@@ -1,0 +1,1 @@
+	Hello Customer, Your Order has been approved by Administrator. Please Wait for Delievery.

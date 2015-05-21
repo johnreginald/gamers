@@ -24,7 +24,7 @@
 					<th>Username</th>
 					<th>Name</th>
 					<th>Email</th>
-					<th>Role</th>
+					<th>Account Type</th>
 					<th class="col-md-2">Actions</th>
 				</tr>
 			</thead>
@@ -37,7 +37,15 @@
 					</td>
 					<td>{{ ucfirst($u->username) }}</td>
 					<td>{{ $u->email }}</td>
-					<td>Administrator</td> <!-- TODO -->
+					<td>
+						@if(Sentry::getUser()->inGroup(Sentry::findGroupByName('Reseller')))
+							Reseller
+						@elseif(Sentry::getUser()->inGroup(Sentry::findGroupByName('Administrator')))
+							Administrator
+						@else
+							Member
+						@endif
+					</td>
 					<td class="col-md-3">
 						<div class="pull-left">
 							{{ Form::open(array('url' => 'administrator/user/' . $u->id, 'method' => 'DELETE', 'class' => 'form')) }}

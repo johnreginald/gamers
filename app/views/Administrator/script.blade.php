@@ -18,9 +18,9 @@
       		'undo', 'redo', 'html', 'insertHorizontalRule'
       		],
       	placeholder: 'Write Something',
-      	imagesLoadURL: "{{ URL::to('/') }}/administrator/images/load",
-      	imageDeleteURL: "{{ URL::to('/') }}/administrator/images/delete",
-      	imageUploadURL: "{{ URL::to('/') }}/administrator/images/upload",
+      	imagesLoadURL: "{{ URL::to('administrator/images/load') }}",
+      	imageDeleteURL: "{{ URL::to('administrator/images/delete') }}",
+      	imageUploadURL: "{{ URL::to('administrator/images/upload') }}",
       	imageUploadParams: {
         	id: 'my_editor'
       	}

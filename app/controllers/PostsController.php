@@ -23,7 +23,8 @@ class PostsController extends \BaseController {
      * @return Response
      */
     public function create() {
-        return View::make('Administrator.Post.create');
+        $category = PostCategory::All();
+        return View::make('Administrator.Post.create', compact('category'));
     }
 
     /**
@@ -33,10 +34,9 @@ class PostsController extends \BaseController {
      */
     public function store() {
         $data = array(
-            'title' => Input::get('title'),
+            'title' => strip_tags(Purifier::clean(Input::get('title'))),
+            'content' => Purifier::clean(Input::get('content')),
             'author' => Sentry::getUser()->username,
-            'content' => Input::get('content'),
-            'status' => Input::get('status')
         );
         $validator = Validator::make($data, Post::$rules);
 
@@ -45,13 +45,18 @@ class PostsController extends \BaseController {
         }
 
         $content = Post::create($data);
+        // Category Update
+        if (gettype(Input::get('category')) == 'NULL') {
+            $content->categories()->detach();
+        } else {
+            $content->categories()->sync(Input::get('category'));
+        }
 
         return Redirect::action('PostsController@edit', ['content' => $content->id])->with('content', Post::find($content->id));
     }
 
     public function view($id) {
         $content = Post::findOrFail($id);
-
         return View::make('Administrator.Post.show', compact('content'));
     }
 
@@ -62,13 +67,11 @@ class PostsController extends \BaseController {
      * @return Response
      */
     public function edit($id) {
-        $content = Post::find($id);
-
-        // if ($content->status == 'trash') {
-        // 	return Redirect::action('PostsController@index')->with('message', Lang::get('message.trash-edit'));
-        // } else {
-        return View::make('Administrator.Post.edit', compact('content'));
-        // }
+        $data = array(
+            'content' => Post::find($id),
+            'category' => PostCategory::All(),
+            );
+        return View::make('Administrator.Post.edit', $data);
     }
 
     /**
@@ -79,20 +82,41 @@ class PostsController extends \BaseController {
      */
     public function update($id) {
         $content = Post::findOrFail($id);
-
-        $validator = Validator::make($data = Input::all(), Post::$rules);
+        $data = array(
+            'title' => strip_tags(Purifier::clean(Input::get('title'))),
+            'content' => Purifier::clean(Input::get('content')),
+            'author' => Sentry::getUser()->username,
+        );
+        $validator = Validator::make($data, Post::$rules);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
-
-        $post = Post::find($id);
+    
+        // Post Update
         $content->update($data);
 
+        $post = Post::find($id);
+        // Category Update
+        if (gettype(Input::get('category')) == 'NULL') {
+            $post->categories()->detach();
+        } else {
+            $post->categories()->sync(Input::get('category'));
+        }
+
+        return Redirect::action('PostsController@edit', ['content' => $id])->withContent($post)->withMessage(Lang::get('message.post-update'))->withStatus('info');
+    }
+
+    public function status_update($id) {
+        $post = Post::find($id);
+        $post->status = Input::get('status');
+        $post->save();
+        // Request Return
         if (Request::ajax()) {
+            // Post Status Json Response
             return Response::json('success', 200);
         } else {
-            return Redirect::action('PostsController@edit', ['content' => $id])->withContent($post)->withMessage(Lang::get('message.post-update'))->withStatus('info');
+            return Redirect::back();
         }
     }
 
@@ -133,17 +157,15 @@ class PostsController extends \BaseController {
     }
 
     /* ===  Media Manager Functions === */
+
     public function load_images() {
-        $dir = 'uploads/';
-        $FILES = array();
-        if(file_exists($dir)) {
-            foreach (glob($dir . "{*.gif,*.jpeg,*.jpg,*.pjpeg,*.png}", GLOB_BRACE) as $files) {
-                $FILES[] = URL::to('/') . '/' . $files;
-            }
-            return Response::json($FILES);   
+        $path = public_path('uploads');
+        if (File::exists($path)) {
+            $files = str_replace(public_path(), URL::to('/'), File::files($path));
+            return Response::json($files);
         } else {
             return Response::json(array('error' => "Images folder does not exist!"));
-        }        
+        }    
     }
 
     public function delete_images() {
@@ -154,14 +176,15 @@ class PostsController extends \BaseController {
     }
 
     public function upload_images() {
+        // SAVE Image
         $file = Input::file('file');
-        $assetPath = '/uploads';
-        $uploadPath = public_path($assetPath);
+        $uploadPath = public_path('uploads');
         $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
-        // Save Images
         $file->move($uploadPath, $name);
-        $response = $assetPath . '/' . $name;
-        return Response::json(array('response' => $response));
+
+        // Response File Name
+        $link = URL::to('uploads') . '/' . $name;
+        return Response::json(array('link' => $link ));
     }
 
 }

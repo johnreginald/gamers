@@ -28,15 +28,26 @@ class ProductsController extends \BaseController {
      * @return Response
      */
     public function store() {
-        $validator = Validator::make($data = Input::all(), Product::$rules);
+        $validator = Validator::make(Input::all(), Product::$rules);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        Product::create($data);
+        $product = new Product;
+        $product->name = Input::get('name');
+        $product->price = Input::get('price');
+        $product->description = Input::get('description');
+        $product->image = strtolower(str_replace(' ', '-', Input::file('image')->getClientOriginalName()));
 
-        return Redirect::action('ProductsController@index');
+        $file = Input::file('image');
+        $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
+        $file->move(public_path('uploads/products'), $name);
+
+        $product->save();
+
+        return Redirect::action('ProductsController@edit', ['product' => $product->id])
+            ->withProduct(Product::find($product->id))->withMessage('Successfully Saved!')->withStatus('success');
     }
 
     /**
@@ -45,6 +56,7 @@ class ProductsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
+    
     public function edit($id) {
         $product = Product::find($id);
 
@@ -59,16 +71,33 @@ class ProductsController extends \BaseController {
      */
     public function update($id) {
         $product = Product::findOrFail($id);
+        $rules = [
+            'name' => 'required',
+            'price' => 'required|numeric',
+        ];
 
-        $validator = Validator::make($data = Input::all(), Product::$rules);
+        $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        $product->update($data);
+        $product->name = Input::get('name');
+        $product->price = Input::get('price');
+        $product->description = Input::get('description');
+        
+        // Save Image
+        if (Input::hasFile('image')) {
+            $product->image = strtolower(str_replace(' ', '-', Input::file('image')->getClientOriginalName()));
+            $file = Input::file('image');
+            $name = strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
+            $file->move(public_path('uploads/products'), $name);
+        }
+        
+        $product->save();
 
-        return Redirect::action('ProductsController@index');
+        return Redirect::action('ProductsController@edit', ['product' => $product->id])
+            ->withProduct(Product::find($product->id))->withMessage('Successfully Saved!')->withStatus('success');
     }
 
     /**
@@ -117,13 +146,13 @@ class ProductsController extends \BaseController {
         foreach (Cart::content() as $c) {
             // Save Order
             $order = new Order;
-            $order->account_id = Auth::id();
+            $order->account_id = Sentry::getUser()->id;
             $order->item_id = $c->id;
             $order->quantity = $c->qty;
             $order->save();
         }
         // Remove Credit to Account
-        $account = Account::find(Auth::id());
+        $account = Account::find(Sentry::getUser()->id);
         If ($account->credit >= Cart::total()) {
             $account->credit = $account->credit - Cart::total();
             $account->save();

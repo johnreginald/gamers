@@ -9,8 +9,10 @@ class Post extends \Eloquent {
     protected $dates = ['deleted_at'];
     // Add your validation rules here
     public static $rules = [
-            // 'title' => 'required'
+            'title' => 'required',
+            'author' => 'required'
     ];
+
     // Don't forget to fill this array
     protected $fillable = ['title', 'content', 'status', 'author'];
 
@@ -33,6 +35,12 @@ class Post extends \Eloquent {
     public static function readmore($id) {
         $post = Post::find($id);
         return (strlen($post->content) > 200) ? substr($post->content, 0, 200) . ' <a href="' . URL::to('post') . "/" . $id .'">Read More</a>' : $post->content;
+    }
+
+    // Relations with Categories
+    public function categories()
+    {
+        return $this->belongsToMany('PostCategory', 'PostCategory_post', 'post_id', 'PostCategory_id');
     }
 
 }

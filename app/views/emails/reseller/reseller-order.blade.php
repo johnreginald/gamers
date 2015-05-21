@@ -1,0 +1,1 @@
+	You got a new order for $product_name from one of our customer. Login and Check Your Reseller Panel for More information.
