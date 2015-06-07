@@ -10,14 +10,26 @@
   | and give it the Closure to execute when that URI is requested.
   |
  */
+Route::get('mail', function(){
+    Mail::send('emails.register', array(
+        'username' => 'johnthelinux',
+        'password' => 'thisispassword',
+        'activationcode' => "tasdfasd"
+        ), function($message)
+    {
+        $message->to('johnthelinux@gmail.com', 'John Reginald')->subject('Account Information for For Gamers, By Gamers Website');
+    });
+});
 
 Route::get('test', function(){
-    Sentry::createGroup(array(
-    'name'        => 'Reseller',
-    ));
-    Sentry::createGroup(array(
-    'name'        => 'Administrator',
-    ));    
+    $user = Sentry::findUserById(1);
+    echo $user->email;
+    // Sentry::createGroup(array(
+    // 'name'        => 'Reseller',
+    // ));
+    // Sentry::createGroup(array(
+    // 'name'        => 'Administrator',
+    // ));    
 });
 
 Route::get('post/{id}', 'HomeController@single');
@@ -27,6 +39,8 @@ Route::get('logout', array('as' => 'logout', 'uses' => 'AccountController@getLog
 
 Route::get('login', 'AccountController@getLogin');
 Route::post('login', 'AccountController@postLogin');
+
+Route::get('activate/{code}/{id}', 'AccountController@activate');
 
 Route::get('register', 'AccountController@getRegister');
 Route::post('register', 'AccountController@postRegister');

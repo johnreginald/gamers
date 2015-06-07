@@ -7,6 +7,8 @@ class PostsTableSeeder extends Seeder {
 
 	public function run()
 	{
+		DB::table('posts')->delete();
+		
 		$faker = Faker::create();
 
 		foreach(range(1, 5) as $index)

@@ -73,11 +73,15 @@ class AccountController extends BaseController {
                 'password' => Input::get('password'),
                 'email' => Input::get('email')
             ));
-            // TODO
-            // $activationCode = $user->getActivationCode();
-            Mail::send('emails.welcome', array('key' => 'value'), function($message)
+            $data = [
+                'username' => Input::get('username'),
+                'password' => Input::get('password'),
+                'activationcode' => $user->getActivationCode(),
+                'id' => Sentry::getUser()->id
+            ];
+            Mail::send('emails.register', $data, function($message)
             {
-                $message->to(Input::get('email'), Input::get('username'))->subject('Welcome!');
+                $message->to(Input::get('email'), Input::get('username'))->subject('Activate Your Account [ For Gamers, By Gamers ]');
             });
             return Redirect::to('login')->withMessage(Lang::get('message.register-success'))->withStatus('success');
         }
@@ -168,6 +172,41 @@ class AccountController extends BaseController {
                 echo "Your Password is Wrong";
             }
         }
+    }
+
+    public function activate($code, $id) {
+        try
+        {
+            $user = Sentry::findUserById($id);
+
+            if ($user->attemptActivation($code))
+            {
+                $data = array(
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    );
+                Mail::send('emails.welcome', $data, function($message) use ($user)
+                {
+                    $message->to($user->email, $user->username)->subject('Welcome to For Gamers, By Gamers');
+                });
+                return Redirect::to('login')->withMessage('Successfully Activated!')->withStatus('success');
+            } else {
+                return Redirect::to('login')->withMessage('Something wrong with Your Activation Code. Please Try Again')->withStatus('danger');
+            }
+
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            return Redirect::to('login')->withMessage('User was not found.')->withStatus('danger');
+        }
+        catch (Cartalyst\Sentry\Users\UserAlreadyActivatedException $e)
+        {
+            return Redirect::to('login')->withMessage('User is already activated.')->withStatus('info');
+        }
+    }
+
+    public function resend_mail() {
+
     }
 
 }

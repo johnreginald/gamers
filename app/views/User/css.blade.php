@@ -1,6 +1,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="{{ URL::to('/') }}/assets/css/bootstrap.{{ Config::get('settings.theme') }}.min.css">
     {{ HTML::style('assets/css/custom.css') }}
+    {{ HTML::style('assets/css/font-awesome.min.css') }}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

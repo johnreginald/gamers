@@ -13,6 +13,8 @@ return array(
 
 	'title' => 'For Gamers, By Gamers',
 
+	'admin-email' => 'johnthelinux@gmail.com',
+
 	
 	/*
 	|--------------------------------------------------------------------------

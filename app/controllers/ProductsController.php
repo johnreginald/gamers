@@ -142,21 +142,36 @@ class ProductsController extends \BaseController {
     }
 
     public function checkout() {
-        // Checkout and Save Ordered Items in Database
-        foreach (Cart::content() as $c) {
-            // Save Order
-            $order = new Order;
-            $order->account_id = Sentry::getUser()->id;
-            $order->item_id = $c->id;
-            $order->quantity = $c->qty;
-            $order->save();
-        }
-        // Remove Credit to Account
+        // Remove Credit from Account
         $account = Account::find(Sentry::getUser()->id);
-        If ($account->credit >= Cart::total()) {
+        if ($account->credit >= Cart::total()) {
+            // Checkout and Save Ordered Items in Database
+            foreach (Cart::content() as $c) {
+
+                // Save Order
+                $order = new Order;
+                $order->account_id = Sentry::getUser()->id;
+                $order->item_id = $c->id;
+                $order->quantity = $c->qty;
+                $order->save();
+
+                $product = Product::findOrFail($order->item_id);
+
+                Mail::send('emails.administrator.order', array(
+                    'customer' => $account->username,
+                    'product_name' => $product->name,
+                    'quantity' => $c->qty
+                    ), function($message)
+                {
+                    $message->to(Config::get('settings.admin-email'), 'Administrator')->subject('New Product Order');
+                });
+
+            }
+
             $account->credit = $account->credit - Cart::total();
             $account->save();
             Cart::destroy();
+
             return Redirect::to('dashboard')->withMessage(Lang::get('message.shop-success'))->withStatus('success');
         } else {
             return Redirect::to('shopping-cart')->withMessage(Lang::get('message.shop-fail'))->withStatus('danger');
